@@ -12,7 +12,7 @@ export default class ResponsavelTecnicosController {
     const user = await auth.authenticate()
     const id = user.id
 
-    const data = await request.validate(ResponsavelValidator)
+    const data = await request.validate(ResponsavelValidator.ResponsavelValidatorStore)
     const responsavel = await Responsavel.create({
       ...data,
       idEmpresa: id,
@@ -27,7 +27,7 @@ export default class ResponsavelTecnicosController {
 
   public async update ({ params, request }: HttpContextContract) {
     const responsavel = await Responsavel.findOrFail(params.id)
-    const data = await request.validate(ResponsavelValidator)
+    const data = await request.validate(ResponsavelValidator.ResponsavelValidatorUpdate)
 
     responsavel.merge(data)
     await responsavel.save()

@@ -10,7 +10,7 @@ export default class ReceitasController {
   public async store ({request, auth}: HttpContextContract) {
     const user = await auth.authenticate()
     const id = user.id
-    const data = await request.validate(ReceitasValidtor)
+    const data = await request.validate(ReceitasValidtor.ReceitaValidatorStore)
     const receitas = await Receitas.create({
       ...data,
       idEmpresa: id,
@@ -28,7 +28,7 @@ export default class ReceitasController {
 
   public async update ({params, request}: HttpContextContract) {
     const receitas = await Receitas.findOrFail(params.id)
-       const data = await request.validate(ReceitasValidtor)
+       const data = await request.validate(ReceitasValidtor.ReceitaValidatorUpdate)
 
     receitas.merge(data)
     await receitas.save()

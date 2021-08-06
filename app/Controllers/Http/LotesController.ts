@@ -12,7 +12,7 @@ export default class LotesController {
     const user = await auth.authenticate()
     const id = user.id
 
-    const data = await request.validate(LoteValidator)
+    const data = await request.validate(LoteValidator.LoteValidatorStore)
     const lote = await Lote.create({ idEmpresa: id, ...data})
     return lote
   }
@@ -24,7 +24,7 @@ export default class LotesController {
 
   public async update ({request, params}: HttpContextContract) {
     const lote = await Lote.findOrFail(params.id)
-    const data = await request.validate(LoteValidator)
+    const data = await request.validate(LoteValidator.LoteValidatorUpdate)
 
     lote.merge(data)
     await lote.save()

@@ -21,12 +21,15 @@ export default class InfortecnicaReceitasController {
   }
 
   public async show ({params}: HttpContextContract) {
+
     const info = await Infortecnica.findOrFail(params.id)
     return info
   }
 
   public async update ({request, params}: HttpContextContract) {
+    console.log('cheguemos no put',params.id)
     const info = await Infortecnica.findOrFail(params.id)
+    console.log('taaquiiiii', info)
     const data = await request.validate(InfortecnicaValidator)
 
     info.merge(data)

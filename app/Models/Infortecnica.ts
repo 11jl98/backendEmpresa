@@ -5,7 +5,7 @@ import Receita from 'App/Models/Receita'
 
 export default class InfortecnicaReceitas extends BaseModel {
   @column({ isPrimary: true })
-  public idIfortecnica: number
+  public idInfortecnica: number
 
   @column()
   public idEmpresa: number

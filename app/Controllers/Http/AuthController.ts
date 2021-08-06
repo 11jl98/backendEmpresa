@@ -6,7 +6,7 @@ export default class AuthController {
     console.log(data, 'chegou')
 
     const json = JSON.parse(data as unknown as string)
-    console.log(json, json.login, json.password)
+    console.log('ta aqui',json.login, json.password)
     const token = auth.attempt(json.login, json.password, {
       expiresIn:'1 days',
     })

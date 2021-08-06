@@ -12,7 +12,7 @@ export default class FornecedorController {
 
     const id = user.id
 
-    const data = await request.validate(FornecedorValidator)
+    const data = await request.validate(FornecedorValidator.FornecedorValidatorStore)
 
     const fornecedor = await Fornecedor.create({
       ...data,
@@ -29,7 +29,7 @@ export default class FornecedorController {
 
   public async update ({ params, request }: HttpContextContract) {
     const fornecedor = await Fornecedor.findOrFail(params.id)
-    const data = await request.validate(FornecedorValidator)
+    const data = await request.validate(FornecedorValidator.FornecedorValidatorUpdate)
     fornecedor.merge(data)
     await fornecedor.save()
     return fornecedor
