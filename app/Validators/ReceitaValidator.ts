@@ -5,9 +5,9 @@ class ReceitaValidatorStore {
 	}
 
 	public schema = schema.create({
-		id_cliente: schema.number(),
-		id_propriedade: schema.number(),
-		id_responsavel: schema.number(),
+		id_cliente: schema.string(),
+		id_propriedade: schema.string(),
+		id_responsavel: schema.string(),
 		numeroreceita:schema.string({trim: true}),
 		numeroart:schema.string({trim: true}),
 		data:schema.string({trim: true}),

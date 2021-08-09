@@ -6,7 +6,7 @@ export default class LoteAgrotoxicoValidator {
   }
 
   public schema = schema.create({
-	id_lote:schema.number(),
+	id_lote:schema.string(),
 	id_agrotoxico:schema.string({trim: true}),
 	nomeagrotoxico:schema.string({trim: true}),
 	numlote:schema.string({trim: true})

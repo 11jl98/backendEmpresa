@@ -5,7 +5,7 @@ class PropriedadeValidatorStore {
 	}
 
 	public schema = schema.create({
-		id_cliente: schema.number(),
+		id_cliente: schema.string({}),
 		nomepropriedade: schema.string({trim: true}),
 		endereco: schema.string({trim: true}),
 		bairro: schema.string({trim: true}),
@@ -28,7 +28,7 @@ class PropriedadeValidatorUpdate {
 	}
 
 	public schema = schema.create({
-		id_cliente: schema.number(),
+		id_cliente: schema.string({}),
 		nomepropriedade: schema.string({trim: true}),
 		endereco: schema.string({trim: true}),
 		bairro: schema.string({trim: true}),

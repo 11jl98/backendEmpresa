@@ -19,6 +19,7 @@ export default class InfortecnicaReceitasController {
       idEmpresa: id,
       idInfortecnica: uuid()
     })
+    await info.preload('receita')
     return info
   }
 

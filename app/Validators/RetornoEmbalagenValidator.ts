@@ -1,4 +1,4 @@
-import { schema,  rules } from '@ioc:Adonis/Core/Validator'
+import { schema } from '@ioc:Adonis/Core/Validator'
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 
 class RetornoEmbalagenValidatorStore {
@@ -6,7 +6,7 @@ class RetornoEmbalagenValidatorStore {
 	
   }
   public schema = schema.create({
-	id_cliente: schema.number(),
+	id_cliente: schema.string(),
 	data:schema.date(),
 	embdevolvidas:schema.number(),
 	nomecliente:schema.string({trim: true}),

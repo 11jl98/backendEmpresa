@@ -6,7 +6,7 @@ export default class MovimentaEtoqueValidator {
   }
 
   public schema = schema.create({
-	 idFornecedor:schema.number(),
+	 idFornecedor:schema.string(),
 	 data: schema.date(),
 	 datavencimento:schema.date(),
 	 datanfe:schema.date(),

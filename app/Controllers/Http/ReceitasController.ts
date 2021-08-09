@@ -18,6 +18,9 @@ export default class ReceitasController {
       idEmpresa: id,
       idReceita: uuid()
     })
+    await receitas.preload('cliente')
+    await receitas.preload('propriedade')
+    await receitas.preload('responsavel')
     return receitas
   }
 

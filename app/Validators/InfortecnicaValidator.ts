@@ -6,7 +6,7 @@ export default class InfortecnicaValidator {
   }
 
   public schema = schema.create({
-	id_receita: schema.number(),
+	id_receita: schema.string(),
 	aplicacao: schema.string({trim: true}),
 	areatratar: schema.string({trim: true}),
 	classetoxico: schema.string({trim: true}),
