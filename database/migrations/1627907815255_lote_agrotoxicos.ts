@@ -5,10 +5,10 @@ export default class LoteAgrotoxicos extends BaseSchema {
 
   public async up () {
     this.schema.createTable(this.tableName, (table) => {
-      table.increments('id_Agrotoxolote')
-      table.integer('id_empresa').unsigned().references('id').inTable('users').onUpdate('CASCADE')
-      table.integer('id_lote').unsigned().references('id_lote').inTable('lotes').onUpdate('CASCADE')
-      table.integer('id_agrotoxico').unsigned()
+      table.uuid('id_Agrotoxolote').primary()
+      table.uuid('id_empresa').references('id').inTable('users').onUpdate('CASCADE')
+      table.uuid('id_lote').references('id_lote').inTable('lotes').onUpdate('CASCADE')
+      table.integer('id_agrotoxico')
       table.string('nomeagrotoxico')
       table.string('numlote')
       table.timestamps(true)

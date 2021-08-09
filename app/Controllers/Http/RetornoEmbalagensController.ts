@@ -1,5 +1,6 @@
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import RetornoEmbalagens from 'App/Models/RetornoEmbalagen'
+import {v4 as uuid} from 'uuid'
 
 export default class RetornoEmbalagensController {
   public async index ({}: HttpContextContract) {
@@ -15,7 +16,8 @@ export default class RetornoEmbalagensController {
 
     const retorno = await RetornoEmbalagens.create({
       idEmpresa:id,
-      ...data
+      ...data,
+      idRetornoembal: uuid()
     })
     return retorno
   }

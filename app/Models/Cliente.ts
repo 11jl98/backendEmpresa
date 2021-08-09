@@ -6,7 +6,7 @@ export default class Cliente extends BaseModel {
   public idCliente: string
 
   @column()
-  public idEmpresa: number
+  public idEmpresa: string
   @belongsTo(() => User, {foreignKey:'idEmpresa'})
   public user: BelongsTo<typeof User>
 

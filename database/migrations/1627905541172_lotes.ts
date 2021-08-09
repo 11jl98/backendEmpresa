@@ -5,8 +5,8 @@ export default class Lotes extends BaseSchema {
 
   public async up () {
     this.schema.createTable(this.tableName, (table) => {
-      table.increments('id_lote')
-      table.integer('id_empresa').unsigned().references('id').inTable('users').onUpdate('CASCADE')
+      table.uuid('id_lote').primary()
+      table.uuid('id_empresa').references('id').inTable('users').onUpdate('CASCADE')
       table.string('numlote')
       table.text('observacao','longtext')
       table.timestamps(true)

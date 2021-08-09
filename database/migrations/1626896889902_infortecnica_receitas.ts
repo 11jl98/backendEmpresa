@@ -5,9 +5,9 @@ export default class InfortecnicaReceitas extends BaseSchema {
 
   public async up () {
     this.schema.createTable(this.tableName, (table) => {
-      table.increments('id_infortecnica')
-      table.integer('id_empresa').unsigned().references('id').inTable('users').onUpdate('CASCADE')
-      table.integer('id_receita').unsigned().references('id_receita').inTable('receitas').onUpdate('CASCADE')
+      table.uuid('id_infortecnica').primary()
+      table.uuid('id_empresa').references('id').inTable('users').onUpdate('CASCADE')
+      table.uuid('id_receita').references('id_receita').inTable('receitas').onUpdate('CASCADE')
       table.text('aplicacao','longtext')
       table.string('areatratar',20)
       table.string('classetoxico',100)

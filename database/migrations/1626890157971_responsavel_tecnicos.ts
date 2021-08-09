@@ -5,8 +5,8 @@ export default class ResponsavelTecnicos extends BaseSchema {
 
   public async up () {
     this.schema.createTable(this.tableName, (table) => {
-      table.increments('id_responsavel')
-      table.integer('id_empresa').unsigned().references('id').inTable('users').onUpdate('CASCADE')
+      table.uuid('id_responsavel').primary()
+      table.uuid('id_empresa').references('id').inTable('users').onUpdate('CASCADE')
       table.string('nome',255)
       table.string('cpf',20)
       table.string('crea',20)

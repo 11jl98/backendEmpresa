@@ -7,25 +7,25 @@ import Responsavel from 'App/Models/ResponsavelTecnico'
 
 export default class Receita extends BaseModel {
   @column({ isPrimary: true })
-  public idReceita: number
+  public idReceita: string
 
   @column()
-  public idEmpresa: number
+  public idEmpresa: string
   @belongsTo(() => User, {foreignKey:'idEmpresa'})
   public user: BelongsTo<typeof User>
 
   @column()
-  public idCliente: number
+  public idCliente: string
   @belongsTo(() => Cliente, {foreignKey:'idCliente'})
   public cliente: BelongsTo<typeof Cliente>
 
   @column()
-  public idPropriedade: number
+  public idPropriedade: string
   @belongsTo(() => Propriedade, {foreignKey:'idPropriedade'})
   public propriedade: BelongsTo<typeof Propriedade>
 
   @column()
-  public idResponsavel: number
+  public idResponsavel: string
   @belongsTo(() => Responsavel, {foreignKey:'idResponsavel'})
   public responsavel: BelongsTo<typeof Responsavel>
 

@@ -4,9 +4,9 @@ import User from 'App/Models/User'
 
 export default class Lote extends BaseModel {
   @column({ isPrimary: true })
-  public id: number
+  public idLote: string
   @column()
-  public idEmpresa: number
+  public idEmpresa: string
   @belongsTo(() => User, {foreignKey:'idEmpresa'})
   public user: BelongsTo<typeof User>
 

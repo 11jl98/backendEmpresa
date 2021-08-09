@@ -5,8 +5,8 @@ export default class Empresas extends BaseSchema {
 
   public async up () {
     this.schema.createTable(this.tableName, (table) => {
-      table.increments('id_cadastro')
-      table.integer('id_empresa').unsigned().references('id').inTable('users').onUpdate('CASCADE')
+      table.uuid('id_cadastro').primary()
+      table.uuid('id_empresa').references('id').inTable('users').onUpdate('CASCADE')
       table.string('nomeempresa')
       table.string('nomefantasia')
       table.string('cpfcnpj',20)

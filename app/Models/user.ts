@@ -5,11 +5,10 @@ import {
   beforeSave,
   BaseModel,
 } from '@ioc:Adonis/Lucid/Orm'
-import {v4 as uuid} from 'uuid'
 
 export default class User extends BaseModel {
   @column({ isPrimary: true })
-  public id: number
+  public id: string
 
   @column()
   public login: string

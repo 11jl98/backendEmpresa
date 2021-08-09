@@ -1,7 +1,7 @@
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Cliente from 'App/Models/Cliente'
 import ClienteVaidator from 'App/Validators/ClienteValidator'
-
+import {v4 as uuid} from 'uuid'
 export default class ClientesController {
   public async index ({ }: HttpContextContract) {
     const cliente = await Cliente.all()
@@ -12,8 +12,13 @@ export default class ClientesController {
     const id = user.id
 
     const data = await request.validate(ClienteVaidator.ClienteValidatorStore)
-      
-    const cliente = await Cliente.create({idEmpresa: id, ...data })
+      console.log('uuid', uuid())
+    const cliente = await Cliente.create({
+      idEmpresa: id,
+      idCliente: uuid(),
+      ...data 
+    })
+    console.log('cliente', cliente)
 
     return cliente
   }

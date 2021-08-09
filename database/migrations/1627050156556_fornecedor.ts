@@ -5,8 +5,8 @@ export default class Fornecedor extends BaseSchema {
 
   public async up () {
     this.schema.createTable(this.tableName, (table) => {
-      table.increments('id_fornecedor')
-      table.integer('id_empresa').unsigned().references('id').inTable('users').onUpdate('CASCADE')
+      table.uuid('id_fornecedor').primary()
+      table.uuid('id_empresa').references('id').inTable('users').onUpdate('CASCADE')
       table.string('nome',255)
       table.string('nomefantasia',255)
       table.string('cpfcnpj',20)

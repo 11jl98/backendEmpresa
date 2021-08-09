@@ -5,15 +5,15 @@ import User from 'App/Models/User'
 
 export default class LoteAgrotoxico extends BaseModel {
   @column({ isPrimary: true })
-  public id: number
+  public id: string
 
   @column()
-  public idEmpresa: number
+  public idEmpresa: string
   @belongsTo(() => User, {foreignKey:'idEmpresa'})
   public user: BelongsTo<typeof User>
 
   @column()
-  public idLote: number
+  public idLote: string
   @manyToMany(() => Lote, { pivotRelatedForeignKey: 'idLote'})
   public Lote: ManyToMany<typeof Lote>
 

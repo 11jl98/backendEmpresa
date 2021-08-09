@@ -5,15 +5,15 @@ import Cliente from 'App/Models/Cliente'
 
 export default class Propriedade extends BaseModel {
   @column({ isPrimary: true })
-  public idPropriedade: number
+  public idPropriedade: string
 
   @column()
-  public idEmpresa: number
+  public idEmpresa: string
   @belongsTo(() => User, {foreignKey:'idEmpresa'})
   public user: BelongsTo<typeof User>
 
   @column()
-  public idCliente: number
+  public idCliente: string
   @belongsTo(() => Cliente, {foreignKey:'idCliente'})
   public cliente: BelongsTo<typeof Cliente>
 

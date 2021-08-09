@@ -4,10 +4,10 @@ import User from 'App/Models/User'
 
 export default class ResponsavelTecnico extends BaseModel {
   @column({ isPrimary: true })
-  public idResponsavel: number
+  public idResponsavel: string
 
   @column()
-  public idEmpresa: number
+  public idEmpresa: string
   @belongsTo(() => User, {foreignKey:'idEmpresa'})
   public user: BelongsTo<typeof User>
 

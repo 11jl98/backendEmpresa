@@ -5,9 +5,9 @@ export default class Movimentaestoques extends BaseSchema {
 
   public async up () {
     this.schema.createTable(this.tableName, (table) => {
-      table.increments('id_estoque')
-      table.integer('id_empresa').unsigned().references('id').inTable('users').onUpdate('CASCADE')
-      table.integer('id_fornecedor').unsigned().references('id_fornecedor').inTable('fornecedors').onUpdate('CASCADE')
+      table.uuid('id_estoque').primary
+      table.uuid('id_empresa').references('id').inTable('users').onUpdate('CASCADE')
+      table.uuid('id_fornecedor').references('id_fornecedor').inTable('fornecedors').onUpdate('CASCADE')
       table.timestamp('data')
       table.timestamp('datavencimento')
       table.timestamp('datanfe')

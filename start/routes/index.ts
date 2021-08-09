@@ -9,6 +9,7 @@ import './propriedade'
 import './receitas'
 import './responsavel'
 import './inventario'
+import './empresa'
 
 Route.get('/', async () => {
   return { hello: 'world' }

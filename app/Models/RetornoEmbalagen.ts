@@ -5,15 +5,15 @@ import Cliente from 'App/Models/Cliente'
 
 export default class RetornoEmbalagen extends BaseModel {
   @column({ isPrimary: true })
-  public idRetornoembal: number
+  public idRetornoembal: string
 
   @column()
-  public idEmpresa: number
+  public idEmpresa: string
   @belongsTo(() => User, {foreignKey:'idEmpresa'})
   public user: BelongsTo<typeof User>
 
   @column()
-  public idCliente: number
+  public idCliente: string
   @belongsTo(() => Cliente, {foreignKey:'idCliente'})
   public cliente: BelongsTo<typeof Cliente>
   

@@ -5,9 +5,9 @@ export default class Propriedades extends BaseSchema {
 
   public async up () {
     this.schema.createTable(this.tableName, (table) => {
-      table.increments('id_propriedade')
-      table.integer('id_empresa').unsigned().references('id').inTable('users').onUpdate('CASCADE')
-      table.integer('id_cliente').unsigned().references('id_cliente').inTable('clientes').onUpdate('CASCADE')
+      table.uuid('id_propriedade').primary()
+      table.uuid('id_empresa').references('id').inTable('users').onUpdate('CASCADE')
+      table.uuid('id_cliente').references('id_cliente').inTable('clientes').onUpdate('CASCADE')
       table.string('nomepropriedade',255)
       table.string('endereco',255)
       table.string('bairro',50)

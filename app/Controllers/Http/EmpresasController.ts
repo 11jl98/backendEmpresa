@@ -1,6 +1,7 @@
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Empresa from 'App/Models/Empresa'
 import EmpresaValidator from 'App/Validators/EmpresaValidator'
+import {v4 as uuid} from 'uuid'
 
 export default class EmpresasController {
 
@@ -13,6 +14,7 @@ export default class EmpresasController {
 
     const empresa = await Empresa.create({
       idEmpresa: id,
+      idCadastro: uuid(),
       ...data
     })
     return empresa

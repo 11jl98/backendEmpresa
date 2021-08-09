@@ -1,6 +1,7 @@
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Propriedade from 'App/Models/Propriedade'
 import PropriedadeValidator from 'App/Validators/PropriedadeValidator'
+import {v4 as uuid} from 'uuid'
 
 export default class PropriedadesController {
   public async index ({}: HttpContextContract) {
@@ -16,6 +17,7 @@ export default class PropriedadesController {
     const propriedade = await Propriedade.create({
       ...data,
       idEmpresa: id,
+      idPropriedade: uuid()
     })
     await propriedade.preload('cliente')
     return propriedade

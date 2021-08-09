@@ -1,5 +1,6 @@
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Estoque from 'App/Models/Movimentaestoque'
+import {v4 as uuid} from 'uuid'
 
 export default class MovimentaestoquesController {
   public async index ({}: HttpContextContract) {
@@ -22,6 +23,7 @@ export default class MovimentaestoquesController {
     const estoque = await Estoque.create({
       ...data,
       idEmpresa: id,
+      idEstoque: uuid()
     })
     return estoque
   }

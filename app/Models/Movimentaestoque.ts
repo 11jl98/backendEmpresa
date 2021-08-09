@@ -5,15 +5,15 @@ import Fornecedor from 'App/Models/Fornecedor'
 
 export default class Movimentaestoque extends BaseModel {
   @column({ isPrimary: true })
-  public idEstoque: number
+  public idEstoque: string
 
   @column()
-  public idEmpresa: number
+  public idEmpresa: string
   @belongsTo(() => User, {foreignKey:'idEmpresa'})
   public user: BelongsTo<typeof User>
 
   @column()
-  public idFornecedor: number
+  public idFornecedor: string
   @belongsTo(() => Fornecedor, {foreignKey:'idFornecedor'})
   public fornecedor: BelongsTo<typeof Fornecedor>
 

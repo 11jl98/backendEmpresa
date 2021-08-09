@@ -4,10 +4,10 @@ import User from 'App/Models/User'
 
 export default class Fornecedor extends BaseModel {
   @column({ isPrimary: true })
-  public idFornecedor: number
+  public idFornecedor: string
 
   @column()
-  public idEmpresa: number
+  public idEmpresa: string
   @belongsTo(() => User, {foreignKey:'idEmpresa'})
   public user: BelongsTo<typeof User>
 

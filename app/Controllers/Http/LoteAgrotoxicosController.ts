@@ -1,6 +1,7 @@
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import AgroLote from 'App/Models/LoteAgrotoxico'
 import AgroLoteValidator from 'App/Validators/LoteAgrotoxicoValidator'
+import {v4 as uuid} from 'uuid'
 
 export default class LoteAgrotoxicosController {
   public async index ({}: HttpContextContract) {
@@ -13,7 +14,11 @@ export default class LoteAgrotoxicosController {
     const id = user.id
 
     const data = await request.validate(AgroLoteValidator)
-    const agroLote = await AgroLote.create({idEmpresa: id, ...data})
+    const agroLote = await AgroLote.create({
+      idEmpresa: id,
+      ...data,
+      id: uuid()
+    })
     return agroLote
   }
 

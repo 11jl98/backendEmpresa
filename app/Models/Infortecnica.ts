@@ -5,15 +5,15 @@ import Receita from 'App/Models/Receita'
 
 export default class InfortecnicaReceitas extends BaseModel {
   @column({ isPrimary: true })
-  public idInfortecnica: number
+  public idInfortecnica: string
 
   @column()
-  public idEmpresa: number
+  public idEmpresa: string
   @belongsTo(() => User, {foreignKey:'idEmpresa'})
   public user: BelongsTo<typeof User>
 
   @column()
-  public idReceita: number
+  public idReceita: string
   @belongsTo(() => Receita, {foreignKey:'idReceita'})
   public receita: BelongsTo<typeof Receita>
 

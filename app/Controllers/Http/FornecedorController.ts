@@ -1,6 +1,7 @@
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Fornecedor from 'App/Models/Fornecedor'
 import FornecedorValidator from 'App/Validators/FornecedorValidator'
+import {v4 as uuid} from 'uuid'
 
 export default class FornecedorController {
   public async index ({ }: HttpContextContract) {
@@ -17,6 +18,7 @@ export default class FornecedorController {
     const fornecedor = await Fornecedor.create({
       ...data,
       idEmpresa: id,
+      idFornecedor: uuid()
     })
 
     return fornecedor

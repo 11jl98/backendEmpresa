@@ -1,6 +1,7 @@
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Responsavel from 'App/Models/ResponsavelTecnico'
 import ResponsavelValidator from 'App/Validators/ResponsavelValidator'
+import {v4 as uuid} from 'uuid'
 
 export default class ResponsavelTecnicosController {
   public async index ({ }: HttpContextContract) {
@@ -16,6 +17,7 @@ export default class ResponsavelTecnicosController {
     const responsavel = await Responsavel.create({
       ...data,
       idEmpresa: id,
+      idResponsavel: uuid()
     })
     return responsavel
   }
