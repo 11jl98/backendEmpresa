@@ -3,16 +3,17 @@ import Cliente from 'App/Models/Cliente'
 import ClienteVaidator from 'App/Validators/ClienteValidator'
 import {v4 as uuid} from 'uuid'
 export default class ClientesController {
+
   public async index ({ }: HttpContextContract) {
     const cliente = await Cliente.all()
     return cliente
   }
+  
   public async store ({ request, auth }: HttpContextContract) {
     const user = await auth.authenticate()
     const id = user.id
 
     const data = await request.validate(ClienteVaidator.ClienteValidatorStore)
-      console.log('uuid', uuid())
     const cliente = await Cliente.create({
       idEmpresa: id,
       idCliente: uuid(),
@@ -32,8 +33,6 @@ export default class ClientesController {
     const cliente = await Cliente.findOrFail(params.id)
     const data = await request.validate(ClienteVaidator.ClienteValidatorUpdate)
       
-    console.log(data, 'chegouuuuuu aqui')
-
     cliente.merge(data)
     await cliente.save
     return cliente
