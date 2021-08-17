@@ -5,7 +5,7 @@ export default class Clientes extends BaseSchema {
 
   public async up () {
     this.schema.createTable(this.tableName, (table) => {
-      table.uuid('id_cliente').primary()
+      table.uuid('id_cliente').primary() 
       table.uuid('id_empresa').references('id').inTable('users').onUpdate('CASCADE')
       table.string('nome',255)
       table.string('cpfcnpj',20)

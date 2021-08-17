@@ -19,6 +19,7 @@ export default class ClientesController {
       idCliente: uuid(),
       ...data 
     })
+    console.log('cliente', cliente)
 
     return cliente
   }
