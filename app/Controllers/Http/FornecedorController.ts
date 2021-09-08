@@ -2,10 +2,13 @@ import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Fornecedor from 'App/Models/Fornecedor'
 import FornecedorValidator from 'App/Validators/FornecedorValidator'
 import {v4 as uuid} from 'uuid'
+import Database from '@ioc:Adonis/Lucid/Database'
 
 export default class FornecedorController {
-  public async index ({ }: HttpContextContract) {
-    const fornecedor = await Fornecedor.all()
+  public async index ({ request }: HttpContextContract) {
+    const page = request.input('page',1)
+    console.log(page)
+    const fornecedor = await Database.from('fornecedors').paginate(page, 5)
     return fornecedor
   }
   public async store ({ request, auth }: HttpContextContract) {

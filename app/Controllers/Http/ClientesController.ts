@@ -2,10 +2,12 @@ import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Cliente from 'App/Models/Cliente'
 import ClienteVaidator from 'App/Validators/ClienteValidator'
 import {v4 as uuid} from 'uuid'
+import Database from '@ioc:Adonis/Lucid/Database'
 export default class ClientesController {
 
-  public async index ({ }: HttpContextContract) {
-    const cliente = await Cliente.all()
+  public async index ({ request }: HttpContextContract) {
+    const page = request.input('page', 1)
+    const cliente = await Database.from('clientes').paginate(page, 5)
     return cliente
   }
   

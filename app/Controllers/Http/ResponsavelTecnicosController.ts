@@ -2,10 +2,12 @@ import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Responsavel from 'App/Models/ResponsavelTecnico'
 import ResponsavelValidator from 'App/Validators/ResponsavelValidator'
 import {v4 as uuid} from 'uuid'
+import Database from '@ioc:Adonis/Lucid/Database'
 
 export default class ResponsavelTecnicosController {
-  public async index ({ }: HttpContextContract) {
-    const responsavel = await Responsavel.all()
+  public async index ({ request }: HttpContextContract) {
+    const page = request.input('page', 1)
+    const responsavel = await Database.from('responsavel_tecnicos').paginate(page, 5)
     return responsavel
   }
 

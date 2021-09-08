@@ -2,10 +2,12 @@ import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Receitas from 'App/Models/Receita'
 import ReceitasValidtor from 'App/Validators/ReceitaValidator'
 import {v4 as uuid} from 'uuid'
+import Database from '@ioc:Adonis/Lucid/Database'
 
 export default class ReceitasController {
-  public async index ({}: HttpContextContract) {
-    const receitas = await Receitas.all()
+  public async index ({ request}: HttpContextContract) {
+    const page = request.input('page', 1)
+    const receitas = await Database.from('receitas').paginate(page, 5)
     return receitas
   }
 

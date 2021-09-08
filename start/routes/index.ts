@@ -10,7 +10,7 @@ import './receitas'
 import './responsavel'
 import './inventario'
 import './empresa'
-
+import './retorno'
 Route.get('/', async () => {
   return { hello: 'world' }
 })
