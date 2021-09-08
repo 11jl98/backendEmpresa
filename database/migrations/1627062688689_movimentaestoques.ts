@@ -8,9 +8,9 @@ export default class Movimentaestoques extends BaseSchema {
       table.uuid('id_estoque').primary
       table.uuid('id_empresa').references('id').inTable('users').onUpdate('CASCADE')
       table.uuid('id_fornecedor').references('id_fornecedor').inTable('fornecedors').onUpdate('CASCADE')
-      table.timestamp('data')
-      table.timestamp('datavencimento')
-      table.timestamp('datanfe')
+      table.string('data')
+      table.string('datavencimento')
+      table.string('datanfe')
       table.string('dentroestado',1)
       table.string('embalagemindea')
       table.string('enviado')

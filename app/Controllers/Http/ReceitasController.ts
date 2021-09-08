@@ -34,6 +34,16 @@ export default class ReceitasController {
     return receitas
   }
 
+  public async showDate({params}: HttpContextContract){
+    const receitas = await Receitas.query()
+    .where('data', '>=', params.dataInit)
+    .andWhere('data', '<=', params.dataFinal).preload('cliente')
+    .preload('propriedade')
+    .preload('responsavel')
+    return receitas
+
+  }
+
   public async update ({params, request}: HttpContextContract) {
     const receitas = await Receitas.findOrFail(params.id)
        const data = await request.validate(ReceitasValidtor.ReceitaValidatorUpdate)

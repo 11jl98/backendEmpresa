@@ -9,19 +9,9 @@ import { AuthenticationException } from '@adonisjs/auth/build/standalone'
  * of named middleware.
  */
 export default class AuthMiddleware {
-  /**
-  * The URL to redirect to when request is Unauthorized
-  */
+  
   protected redirectTo = '/login'
 
-  /**
-   * Authenticates the current HTTP request against a custom set of defined
-   * guards.
-   *
-   * The authentication loop stops as soon as the user is authenticated using any
-   * of the mentioned guards and that guard will be used by the rest of the code
-   * during the current request.
-   */
   protected async authenticate (auth: HttpContextContract['auth'], guards: any[]) {
     /**
      * Hold reference to the guard last attempted within the for loop. We pass
@@ -56,14 +46,8 @@ export default class AuthMiddleware {
     )
   }
 
-  /**
-   * Handle request
-   */
   public async handle ({ auth }: HttpContextContract, next: () => Promise<void>, customGuards: string[]) {
-    /**
-     * Uses the user defined guards or the default guard mentioned in
-     * the config file
-     */
+  
     const guards = customGuards.length ? customGuards : [auth.name]
     await this.authenticate(auth, guards)
     await next()

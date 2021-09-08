@@ -10,6 +10,15 @@ export default class ClientesController {
     const cliente = await Database.from('clientes').paginate(page, 5)
     return cliente
   }
+
+  public async indexFindByCliente ({ auth }: HttpContextContract) {
+    const user = await auth.authenticate()
+    const id = user.id
+    const cliente = await Cliente.query().select(['id_cliente', 'nome'])
+     .where('id_empresa', '=', id )
+    return cliente
+  }
+
   
   public async store ({ request, auth }: HttpContextContract) {
     const user = await auth.authenticate()

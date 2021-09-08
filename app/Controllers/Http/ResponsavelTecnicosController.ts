@@ -5,12 +5,21 @@ import {v4 as uuid} from 'uuid'
 import Database from '@ioc:Adonis/Lucid/Database'
 
 export default class ResponsavelTecnicosController {
-  public async index ({ request }: HttpContextContract) {
+  public async index ({ request, auth }: HttpContextContract) {
+    const user = await auth.authenticate()
+    const id = user.id
     const page = request.input('page', 1)
-    const responsavel = await Database.from('responsavel_tecnicos').paginate(page, 5)
+    const responsavel = await await Database.from('responsavel_tecnicos').paginate(page, 5)
     return responsavel
   }
 
+  public async indexFindBySelect ({ auth }: HttpContextContract) {
+    const user = await auth.authenticate()
+    const id = user.id
+    const responsavel = await Responsavel.query().select(['id_responsavel', 'nome']).where('id_empresa', '=', id )
+    return responsavel
+  }
+  
   public async store ({ request, auth }: HttpContextContract) {
     const user = await auth.authenticate()
     const id = user.id

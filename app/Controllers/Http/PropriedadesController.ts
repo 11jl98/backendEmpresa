@@ -4,8 +4,12 @@ import PropriedadeValidator from 'App/Validators/PropriedadeValidator'
 import {v4 as uuid} from 'uuid'
 
 export default class PropriedadesController {
-  public async index ({}: HttpContextContract) {
-    const propriedade = await Propriedade.all()
+  public async index ({ params, auth }: HttpContextContract) {
+    const user = await auth.authenticate()
+    const id = user.id
+    const propriedade = await Propriedade.query().select(['id_propriedade', 'nomepropriedade'])
+    .where('id_cliente', '=', params.id)
+    .andWhere('id_empresa', '=', id)
     return propriedade
   }
 
