@@ -18,7 +18,6 @@ export default class Clientes extends BaseSchema {
       table.string('telefone',15)
       table.string('email',100)
       table.string('iepr',20)
-      table.string('tipopessoa')
       table.string('observacao',1000)
       table.string('rgie',20)
       table.string('status',20)

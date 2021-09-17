@@ -4,13 +4,15 @@ import Estoque from 'App/Models/Movimentaestoque'
 export default class InventarioestoquesController {
   public async index({ }: HttpContextContract) {
     const estoque = await Estoque.all()
-
+    let quant = 0
     const est = estoque.reduce((acc, current) => {
-      acc[current.nomeagrotoxico] = acc[current.nomeagrotoxico] || []
-      acc[current.nomeagrotoxico].push(current.quantidade)
+      acc[current.nomeagrotoxico] = acc[current.nomeagrotoxico] || {}
+      acc[current.nomeagrotoxico][current.nomeembalagem] = acc[current.nomeagrotoxico][current.nomeembalagem] ||{}
+      acc[current.nomeagrotoxico][current.nomeembalagem]['quantidade'] = acc[current.nomeagrotoxico][current.nomeembalagem]['quantidade']||0 
+
+      acc[current.nomeagrotoxico][current.nomeembalagem]['quantidade'] += Number(current.quantidade)
       return acc
     }, {})
-      
     return est
   }
 

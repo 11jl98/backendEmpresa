@@ -1,4 +1,5 @@
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
+import PropriedadeRepo from 'App/Repositories/PropriedadeRepo'
 import Propriedade from 'App/Models/Propriedade'
 import PropriedadeValidator from 'App/Validators/PropriedadeValidator'
 import {v4 as uuid} from 'uuid'
@@ -7,9 +8,15 @@ export default class PropriedadesController {
   public async index ({ params, auth }: HttpContextContract) {
     const user = await auth.authenticate()
     const id = user.id
-    const propriedade = await Propriedade.query().select(['id_propriedade', 'nomepropriedade'])
-    .where('id_cliente', '=', params.id)
-    .andWhere('id_empresa', '=', id)
+    const propriedade = await PropriedadeRepo.indexInit(params.id, id)
+    return propriedade
+  }
+  public async indexInit ({ params, auth }: HttpContextContract) {
+    const user = await auth.authenticate()
+    const id = user.id
+
+    const propriedade = await PropriedadeRepo.indexInit(params.id, id)
+
     return propriedade
   }
 
@@ -27,11 +34,13 @@ export default class PropriedadesController {
     return propriedade
   }
 
-  public async show ({ params }: HttpContextContract) {
-    const propriedade = await Propriedade.findOrFail(params.id)
-    await propriedade.preload('cliente')
+  public async show ({ params, auth }: HttpContextContract) {
+    const user = await auth.authenticate()
+    const id = user.id
+    const propriedade = await PropriedadeRepo.show(params.id, id)
     return propriedade
   }
+
 
   public async update ({ request, params }: HttpContextContract) {
     const propriedade = await Propriedade.findOrFail(params.id)
@@ -39,7 +48,6 @@ export default class PropriedadesController {
 
     propriedade.merge(data)
     await propriedade.save()
-    await propriedade.preload('cliente')
     return propriedade
   }
 

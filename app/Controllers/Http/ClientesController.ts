@@ -1,13 +1,33 @@
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Cliente from 'App/Models/Cliente'
+import ClienteRepo from 'App/Repositories/ClienteRepo'
 import ClienteVaidator from 'App/Validators/ClienteValidator'
 import {v4 as uuid} from 'uuid'
-import Database from '@ioc:Adonis/Lucid/Database'
 export default class ClientesController {
 
-  public async index ({ request }: HttpContextContract) {
-    const page = request.input('page', 1)
-    const cliente = await Database.from('clientes').paginate(page, 5)
+  public async index ({ params, auth }: HttpContextContract) {
+    const user = await auth.authenticate()
+    const id = user.id
+    let page= params.page 
+    let texto = params.texto 
+    let filtro  = params.filtro
+    
+    texto = decodeURIComponent(texto)
+
+
+    const cliente = await ClienteRepo.index(filtro, texto, page, id)
+    console.log(cliente)
+      
+    return cliente
+  }
+  public async indexInit ({ params, auth }: HttpContextContract) {
+    const user = await auth.authenticate()
+    const id = user.id
+    let page= params.page 
+    
+
+    const cliente = await ClienteRepo.indexInit(page, id)
+
     return cliente
   }
 
@@ -17,20 +37,22 @@ export default class ClientesController {
     const cliente = await Cliente.query().select(['id_cliente', 'nome'])
      .where('id_empresa', '=', id )
     return cliente
+    
   }
-
   
   public async store ({ request, auth }: HttpContextContract) {
     const user = await auth.authenticate()
     const id = user.id
 
     const data = await request.validate(ClienteVaidator.ClienteValidatorStore)
+    const Uuid = uuid()
     const cliente = await Cliente.create({
       idEmpresa: id,
-      idCliente: uuid(),
+      idCliente: Uuid,
       ...data 
     })
-    console.log('cliente', cliente)
+    console.log(cliente)
+    cliente.idCliente = Uuid
 
     return cliente
   }
@@ -45,12 +67,14 @@ export default class ClientesController {
     const data = await request.validate(ClienteVaidator.ClienteValidatorUpdate)
       
     cliente.merge(data)
-    await cliente.save
+    await cliente.save()
+    console.log(cliente)
     return cliente
   }
 
   public async destroy ({ params }: HttpContextContract) {
     const cliente = await Cliente.findOrFail(params.id)
     await cliente.delete()
+    return cliente
   }
 }
