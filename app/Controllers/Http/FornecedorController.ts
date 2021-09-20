@@ -15,14 +15,15 @@ export default class FornecedorController {
     const user = await auth.authenticate()
 
     const id = user.id
-
+    const Uuid = uuid()
     const data = await request.validate(FornecedorValidator.FornecedorValidatorStore)
 
     const fornecedor = await Fornecedor.create({
       ...data,
       idEmpresa: id,
-      idFornecedor: uuid()
+      idFornecedor: Uuid
     })
+    fornecedor.idFornecedor = Uuid
 
     return fornecedor
   }

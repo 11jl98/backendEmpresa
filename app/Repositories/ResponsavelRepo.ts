@@ -17,16 +17,17 @@ export default class ResponsavelRepositories {
 
     }
     static async indexInit(page, idEmpresa) {
-        const cliente = await Responsavel.query()
-    .select(['id_cliente', 'nome', 'cpfcnpj','endereco','bairro',
-    'numero','cidade','uf','cep','telefone','email','iepr','observacao','rgie'])
+        const responsavel = await Responsavel.query()
+    .select(['id_responsavel','nome','cpf', 'crea', 'endereco', 'bairro','numero', 'cidade', 'uf', 
+    'cep', 'telefone','email', 'receitasart', 'proximareceita', 'artatual', 
+    'observacao', 'profissao','tokensc','complementoreceita','seriesc','conselho','contrato'])
     .where('id_empresa', '=', idEmpresa)
     .paginate(page, 5)
-    console.log(cliente)
       
-    return cliente
+    return responsavel
 
     }
+    
     static async indexFindBySelect(idEmpresa){
         const responsavel = await Responsavel.query().select(['id_responsavel', 'nome']).where('id_empresa', '=', idEmpresa )
     return responsavel

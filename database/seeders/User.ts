@@ -7,6 +7,8 @@ export default class UserSeeder extends BaseSeeder {
       {
         login:'09410796601',
         password:'secret',
+				rule: 'admin',
+
         id:uuid()
       },
     ])

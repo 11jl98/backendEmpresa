@@ -15,6 +15,9 @@ export default class User extends BaseModel {
 
   @column()
   public password: string
+  
+  @column()
+  public rule: 'normal' | 'admin'
 
   @column()
   public rememberMeToken?: string

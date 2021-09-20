@@ -5,7 +5,7 @@ import ResponsavelValidator from 'App/Validators/ResponsavelValidator'
 import {v4 as uuid} from 'uuid'
 
 export default class ResponsavelTecnicosController {
-  public async index ({ request, params, auth }: HttpContextContract) {
+  public async index ({ params, auth }: HttpContextContract) {
     const user = await auth.authenticate()
     const id = user.id
     let page= params.page 
@@ -15,6 +15,15 @@ export default class ResponsavelTecnicosController {
     texto = decodeURIComponent(texto)
 
     const responsavel = await ResponsavelRepo.index(filtro, texto, page, id)
+      
+    return responsavel
+  }
+  public async indexInit ({ params, auth }: HttpContextContract) {
+    const user = await auth.authenticate()
+    const id = user.id
+    let page= params.page 
+
+    const responsavel = await ResponsavelRepo.indexInit(page, id)
       
     return responsavel
   }

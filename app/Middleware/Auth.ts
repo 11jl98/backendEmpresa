@@ -1,24 +1,12 @@
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import { AuthenticationException } from '@adonisjs/auth/build/standalone'
 
-/**
- * Auth middleware is meant to restrict un-authenticated access to a given route
- * or a group of routes.
- *
- * You must register this middleware inside `start/kernel.ts` file under the list
- * of named middleware.
- */
 export default class AuthMiddleware {
   
   protected redirectTo = '/login'
 
   protected async authenticate (auth: HttpContextContract['auth'], guards: any[]) {
-    /**
-     * Hold reference to the guard last attempted within the for loop. We pass
-     * the reference of the guard to the "AuthenticationException", so that
-     * it can decide the correct response behavior based upon the guard
-     * driver
-     */
+  
     let guardLastAttempted: string | undefined
 
     for (let guard of guards) {
