@@ -16,7 +16,6 @@ export default class ClientesController {
 
 
     const cliente = await ClienteRepo.index(filtro, texto, page, id)
-    console.log(cliente)
       
     return cliente
   }

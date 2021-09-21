@@ -18,7 +18,7 @@ class FornecedorValidatorStore {
 	telefone: schema.string.optional({trim: true}, [rules.maxLength(11)]),
 	email: schema.string.optional({trim: true}, [rules.email()]),
 	ie: schema.string({trim: true}),
-	observacao: schema.string({trim: true})
+	observacao: schema.string.optional({trim: true})
   })
 
   public messages = {}
@@ -40,7 +40,7 @@ class FornecedorValidatorUpdate {
 	  telefone: schema.string.optional({trim: true}, [rules.maxLength(11)]),
 	  email: schema.string.optional({trim: true}, [rules.email()]),
 	  ie: schema.string({trim: true}),
-	  observacao: schema.string({trim: true})
+	  observacao: schema.string.optional({trim: true})
 	})
   
 	public messages = {}
