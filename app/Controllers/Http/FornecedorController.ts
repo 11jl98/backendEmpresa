@@ -28,7 +28,7 @@ export default class FornecedorController {
     
     texto = decodeURIComponent(texto)
 
-    const responsavel = await FornecedorRepo.indexPaginate(filtro, texto, page, id)
+    const responsavel = await FornecedorRepo.indexPaginate(texto,filtro, page, id)
       
     return responsavel
   }

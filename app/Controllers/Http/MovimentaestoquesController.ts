@@ -17,7 +17,7 @@ export default class MovimentaestoquesController {
       'json', 'naturezaoperacao', 'notafiscal','numlote', 'observacao', 'quantidade', 'receita', 'registroagrotox',
       'serie', 'statussc'])
     
-    if(data.tipomovimentacao !== "ENTRADA"){
+    if(data.tipomovimentacao === "ENTRADA"){
       data.quantidade = -(data.quantidade)
     }
     const estoque = await Estoque.create({
@@ -40,7 +40,7 @@ export default class MovimentaestoquesController {
       'json', 'naturezaoperacao', 'notafiscal','numlote', 'observacao', 'quantidade', 'receita', 'registroagrotox',
       'serie', 'statussc'])
 
-      if(data.tipomovimentacao !== "ENTRADA"){
+      if(data.tipomovimentacao !== "SAIDA" ||data.tipomovimentacao !== "INVENTARIO-SAIDA" ||data.tipomovimentacao !== "DEVOLUCAO"){
         data.quantidade = -(data.quantidade)
       }
       
