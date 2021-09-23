@@ -23,37 +23,15 @@ export default class InventarioestoquesController {
         acc['entrada'] = acc['entrada']|| []
         acc['saida'] = acc['saida'] || []
 
-      if (current.tipomovimentacao === 'ENTRADA') {
+      if (current.tipomovimentacao === 'COMPRA' || current.tipomovimentacao === 'TRANSFERENCIA-ENTRADA') {
         acc['entrada'].push(current)
       }
-      else {
+      else if( current.tipomovimentacao === 'VENDA' || current.tipomovimentacao === 'TRANSFERENCIA-SAIDA'|| current.tipomovimentacao === 'DEVOLUCAO' ){
         acc['saida'].push(current)
       }
       return acc
     }, {})
 
-    return est
-  }
-
-  public async showDate({params}: HttpContextContract){
-    const estoque = await Estoque.query()
-    .where('data', '>=', params.dataInit)
-    .andWhere('data', '<=', params.dataFinal)
-    console.log(estoque)
-
-    const est = estoque.reduce((acc, current) => {
-        acc['entrada'] = acc['entrada']|| []
-        acc['saida'] = acc['saida'] || []
-  
-      if (current.tipomovimentacao === 'ENTRADA') {
-        acc['entrada'].push(current)
-      }
-      else {
-        acc['saida'].push(current)
-      }
-      return acc
-    }, {})
-  
     return est
   }
   

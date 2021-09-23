@@ -26,8 +26,6 @@ export default class Movimentaestoque extends BaseModel {
   @column()
   public datanfe: DateTime
 
-  @column()
-  public dentroestado: string
 
   @column()
   public embalagemindea: string
@@ -45,9 +43,6 @@ export default class Movimentaestoque extends BaseModel {
   public tipoembalagem: string
 
   @column()
-  public id: string
-
-  @column()
   public unidademmbalagem: string
 
   @column()
@@ -59,8 +54,6 @@ export default class Movimentaestoque extends BaseModel {
   @column()
   public json: string
 
-  @column()
-  public naturezaoperacao: string
 
   @column()
   public notafiscal: string
@@ -72,7 +65,7 @@ export default class Movimentaestoque extends BaseModel {
   public observacao: string
 
   @column()
-  public quantidade: string
+  public quantidade: number
 
   @column()
   public receita: string

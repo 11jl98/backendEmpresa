@@ -1,4 +1,4 @@
-import { schema } from '@ioc:Adonis/Core/Validator'
+import { schema, rules } from '@ioc:Adonis/Core/Validator'
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 class PropriedadeValidatorStore {
 	constructor(protected ctx: HttpContextContract) {
@@ -7,6 +7,9 @@ class PropriedadeValidatorStore {
 	public schema = schema.create({
 		id_cliente: schema.string({}),
 		nomepropriedade: schema.string({trim: true}),
+		cpfcnpj:schema.string({trim: true},[rules.minLength(11), rules.maxLength(25)]),
+		iepr: schema.string({trim: true}),
+		rgie:schema.string({trim: true}),
 		endereco: schema.string({trim: true}),
 		bairro: schema.string({trim: true}),
 		numero: schema.string({trim: true}),
@@ -26,6 +29,9 @@ class PropriedadeValidatorUpdate {
 	public schema = schema.create({
 		id_cliente: schema.string({}),
 		nomepropriedade: schema.string({trim: true}),
+		cpfcnpj:schema.string({trim: true}),
+		iepr: schema.string({trim: true}),
+		rgie:schema.string({trim: true}),
 		endereco: schema.string({trim: true}),
 		bairro: schema.string({trim: true}),
 		numero: schema.string({trim: true}),

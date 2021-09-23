@@ -44,9 +44,6 @@ export default class Cliente extends BaseModel {
   public iepr: string
 
   @column()
-  public tipopessoa: string
-
-  @column()
   public observacao: string
 
   @column()

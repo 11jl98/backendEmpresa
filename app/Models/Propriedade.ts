@@ -21,6 +21,15 @@ export default class Propriedade extends BaseModel {
   public nomepropriedade: string
 
   @column()
+  public cpfcnpj: string
+
+  @column()
+  public iepr: string
+
+  @column()
+  public rgie: string
+
+  @column()
   public endereco: string
 
   @column()
@@ -50,11 +59,6 @@ export default class Propriedade extends BaseModel {
   @column()
   public longitude: string
 
-  @column()
-  public telefone: string
-
-  @column()
-  public iepr: string
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
