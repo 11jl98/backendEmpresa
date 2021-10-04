@@ -1,3 +1,7 @@
 import Route from '@ioc:Adonis/Core/Route'
 
-Route.resource('/infortecnica', 'InfortecnicasController').apiOnly()
+Route.get('/infortecnica/:id', 'InfortecnicasController.show')
+Route.get('/infortecnica/:idInfo/:idAgrotoxico', 'InfortecnicasController.index')
+Route.post('/infortecnica', 'InfortecnicasController.store')
+Route.put('/infortecnica/:id', 'InfortecnicasController.update')
+Route.delete('/infortecnica/:id', 'InfortecnicasController.destroy')

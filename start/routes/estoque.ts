@@ -1,3 +1,9 @@
 import Route from '@ioc:Adonis/Core/Route'
 
-Route.resource('/estoque', 'MovimentaestoquesController').apiOnly()
+Route.get('/estoque/:texto/:filtro/:page', 'MovimentaestoquesController.indexByParams')
+Route.get('/estoque/pesquisa/:dataInit/:dataFinal/:page', 'MovimentaestoquesController.indexByDate')
+Route.get('/estoque/:texto/:filtro/:dataInit/:dataFinal/:page', 'MovimentaestoquesController.indexByParamsDate')
+Route.get('/estoque/:page', 'MovimentaestoquesController.index')
+Route.post('/estoque', 'MovimentaestoquesController.store')
+Route.put('/estoque/:id', 'MovimentaestoquesController.update')
+Route.delete('/estoque/:id', 'MovimentaestoquesController.destroy')

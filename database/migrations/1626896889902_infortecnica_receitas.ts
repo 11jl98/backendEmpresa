@@ -30,6 +30,8 @@ export default class InfortecnicaReceitas extends BaseSchema {
       table.string('intervaloentrada',255)
       table.string('intervaloseguranca',255)
       table.string('lote',255)
+      table.integer('id_agrotoxico')
+      table.integer('id_cultura')
       table.string('modaplicacao',255)
       table.text('modoaplicacao','longext')
       table.string('nomeagrotoxico',255)

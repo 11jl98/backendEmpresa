@@ -84,6 +84,13 @@ export default class InfortecnicaReceitas extends BaseModel {
   public lote: string
 
   @column()
+  public idAgrotoxico: number
+
+  @column()
+  public idCultura: number
+
+
+  @column()
   public modaplicacao: string
 
   @column()
@@ -91,6 +98,7 @@ export default class InfortecnicaReceitas extends BaseModel {
 
   @column()
   public nomeagrotoxico: string
+  
 
   @column()
   public nomecultura: string

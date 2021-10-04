@@ -18,14 +18,19 @@ export default class Movimentaestoque extends BaseModel {
   public fornecedor: BelongsTo<typeof Fornecedor>
 
   @column()
-  public data: DateTime
+  public idInfortecnica: string
+
+  @column()
+  public numerocontrole: number
+
+  @column.date({ autoCreate: false})
+  public data?: DateTime
 
   @column()
   public datavencimento: DateTime
 
   @column()
   public datanfe: DateTime
-
 
   @column()
   public embalagemindea: string
@@ -37,13 +42,19 @@ export default class Movimentaestoque extends BaseModel {
   public nomeagrotoxico: string
 
   @column()
+  public idAgrotoxico: number
+
+  @column()
   public nomeembalagem: string
 
   @column()
-  public tipoembalagem: string
+  public tipoembalagem: number
 
   @column()
   public unidademmbalagem: string
+  @column()
+  public idEmbalagem: number
+
 
   @column()
   public nomeresponsaveltecnico: string
@@ -53,7 +64,6 @@ export default class Movimentaestoque extends BaseModel {
 
   @column()
   public json: string
-
 
   @column()
   public notafiscal: string
@@ -84,4 +94,5 @@ export default class Movimentaestoque extends BaseModel {
 
   @column.dateTime({ autoCreate: true, autoUpdate: true })
   public updatedAt: DateTime
+  
 }

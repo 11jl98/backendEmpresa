@@ -2,47 +2,80 @@ import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Receitas from 'App/Models/Receita'
 import ReceitasValidtor from 'App/Validators/ReceitaValidator'
 import {v4 as uuid} from 'uuid'
-import Database from '@ioc:Adonis/Lucid/Database'
-
+import ReceitaRepo from 'App/Repositories/ReceitaRepo'
 export default class ReceitasController {
-  public async index ({ request}: HttpContextContract) {
-    const page = request.input('page', 1)
-    const receitas = await Database.from('receitas').paginate(page, 5)
+  public async index ({ auth, params}: HttpContextContract) {
+    const user = await auth.authenticate()
+    const id = user.id
+    let page= params.page 
+    let texto = params.texto 
+    let filtro  = params.filtro
+    
+    texto = decodeURIComponent(texto)
+
+    const receitas = await ReceitaRepo.index(filtro, texto, page, id)
+    return receitas
+  }
+  public async indexPaginate ({ auth, params}: HttpContextContract) {
+    const user = await auth.authenticate()
+    const id = user.id
+    let page= params.page 
+
+    const receitas = await ReceitaRepo.indexPaginate(page, id)
+    return receitas
+  }
+
+  public async indexDate ({ auth, params}: HttpContextContract) {
+    const user = await auth.authenticate()
+    const id = user.id
+    let page= params.page 
+    let dataInit = params.dataInit
+    let dataFinal = params.dataFinal
+
+    const receitas = await ReceitaRepo.indexDate(dataInit, dataFinal,page, id)
+    return receitas
+  }
+
+  public async indexParamsDate ({ auth, params}: HttpContextContract) {
+    const user = await auth.authenticate()
+    const id = user.id
+    let page= params.page 
+    let dataInit = params.dataInit
+    let dataFinal = params.dataFinal
+    let texto = params.texto 
+    let filtro  = params.filtro
+    
+    texto = decodeURIComponent(texto)
+
+    const receitas = await ReceitaRepo.indexParamsDate(texto, filtro,dataInit, dataFinal,page, id)
     return receitas
   }
 
   public async store ({request, auth}: HttpContextContract) {
     const user = await auth.authenticate()
     const id = user.id
+    const Uuid = uuid()
     const data = await request.validate(ReceitasValidtor.ReceitaValidatorStore)
     const receitas = await Receitas.create({
       ...data,
       idEmpresa: id,
-      idReceita: uuid()
+      idReceita: Uuid
     })
+    receitas.idReceita = Uuid
+    return receitas
+  }
+
+  public async show ({params, auth}: HttpContextContract) {
+    const user = await auth.authenticate()
+    const id = user.id
+    const receitas = await ReceitaRepo.show(params.id, id)
+
     await receitas.preload('cliente')
     await receitas.preload('propriedade')
     await receitas.preload('responsavel')
     return receitas
   }
 
-  public async show ({params}: HttpContextContract) {
-    const receitas = await Receitas.findOrFail(params.id)
-    await receitas.preload('cliente')
-    await receitas.preload('propriedade')
-    await receitas.preload('responsavel')
-    return receitas
-  }
-
-  public async showDate({params}: HttpContextContract){
-    const receitas = await Receitas.query()
-    .where('data', '>=', params.dataInit)
-    .andWhere('data', '<=', params.dataFinal).preload('cliente')
-    .preload('propriedade')
-    .preload('responsavel')
-    return receitas
-
-  }
 
   public async update ({params, request}: HttpContextContract) {
     const receitas = await Receitas.findOrFail(params.id)

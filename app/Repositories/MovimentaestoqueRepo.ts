@@ -2,51 +2,97 @@ import Movimentaestoque from "App/Models/Movimentaestoque";
 
 export default class PropriedadesRepositories {
 
-static async indexInit(page, idEmpresa){
+    static async storeMovReceita(data, idEmpresa, uuid) {
+     const movimentaestoque = await Movimentaestoque.create({
+         ...data,
+         tipomovimentacao: 'VENDA',
+         idEstoque: uuid,
+         idEmpresa: idEmpresa,
+     })
+     console.log(movimentaestoque)
+        return movimentaestoque
 
-    const movimentaestoque = await Movimentaestoque.query()
-    .select(['id_estoque','id_fornecedor', 'data', 'datavencimento', 'datanfe',  'embalagemindea',
-     'enviado', 'nomeagrotoxico', 'nomeembalagem', 'tipoembalagem', 'unidademmbalagem', 'nomeresponsaveltecnico', 
-    'tipomovimentacao', 'json', 'notafiscal', 'numlote', 'observacao', 'quantidade', 'receita', 'registroagrotox', 'serie', 'statussc',])
-    .where('id_empresa', '=', idEmpresa)
-    .paginate(page, 5)
-    console.log(movimentaestoque)
-      
-    return movimentaestoque
-}
+    }
 
-static async indexByParams(texto, filtro, page, idEmpresa){
+    static async indexInit(page, idEmpresa) {
 
-    const movimentaestoque = await Movimentaestoque.query()
-    .select(['id_estoque','id_fornecedor', 'data', 'datavencimento', 'datanfe',  'embalagemindea',
-     'enviado', 'nomeagrotoxico', 'nomeembalagem', 'tipoembalagem', 'unidademmbalagem', 'nomeresponsaveltecnico', 
-    'tipomovimentacao', 'json', 'notafiscal', 'numlote', 'observacao', 'quantidade', 'receita', 'registroagrotox', 'serie', 'statussc',])
-    .where('id_empresa', '=', idEmpresa)
-    .andWhere(filtro, 'like', `%${texto}%`)
-    .orderBy(filtro, 'asc')
-    .paginate(page, 5)
-    
-console.log(movimentaestoque)
+        const movimentaestoque = await Movimentaestoque.query()
+            .select(['id_estoque', 'id_fornecedor', 'numerocontrole', 'data', 'datavencimento', 'datanfe', 'embalagemindea',
+                'enviado', 'nomeagrotoxico', 'id_agrotoxico', 'nomeembalagem', 'tipoembalagem', 'unidademmbalagem', 'id_embalagem', 'nomeresponsaveltecnico',
+                'tipomovimentacao', 'json', 'notafiscal', 'numlote', 'observacao', 'quantidade', 'receita', 'registroagrotox', 'serie', 'statussc',])
+            .where('id_empresa', '=', idEmpresa)
+            .paginate(page, 5)
+        console.log(movimentaestoque)
 
-return movimentaestoque
-}
+        return movimentaestoque
+    }
 
-static async indexByParamsDate(texto, filtro, dataInit, dataFinal, page, idEmpresa){
+    static async indexByParams(texto, filtro, page, idEmpresa) {
 
-    const movimentaestoque = await Movimentaestoque.query()
-    .select(['id_estoque','id_fornecedor', 'data', 'datavencimento', 'datanfe',  'embalagemindea',
-     'enviado', 'nomeagrotoxico', 'nomeembalagem', 'tipoembalagem', 'unidademmbalagem', 'nomeresponsaveltecnico', 
-    'tipomovimentacao', 'json', 'notafiscal', 'numlote', 'observacao', 'quantidade', 'receita', 'registroagrotox', 'serie', 'statussc',])
-    .where('id_empresa', '=', idEmpresa)
-    .andWhere(filtro, 'like', `%${texto}%`)
-    .andWhere('data', '>=', dataInit)
-    .andWhere('data', '<=', dataFinal)
-    .orderBy(filtro, 'asc')
-    .paginate(page, 5)
-    
-console.log(movimentaestoque)
+        const movimentaestoque = await Movimentaestoque.query()
+            .select(['id_estoque', 'id_fornecedor', 'numerocontrole', 'data', 'datavencimento', 'datanfe', 'embalagemindea',
+                'enviado', 'nomeagrotoxico', 'id_agrotoxico', 'nomeembalagem', 'tipoembalagem', 'unidademmbalagem', 'id_embalagem', 'nomeresponsaveltecnico',
+                'tipomovimentacao', 'json', 'notafiscal', 'numlote', 'observacao', 'quantidade', 'receita', 'registroagrotox', 'serie', 'statussc',])
+            .where('id_empresa', '=', idEmpresa)
+            .andWhere(filtro, 'like', `%${texto}%`)
+            .orderBy(filtro, 'asc')
+            .paginate(page, 5)
 
-return movimentaestoque
-}
+        console.log(movimentaestoque)
+
+        return movimentaestoque
+    }
+
+    static async indexByDate( dataInit, dataFinal, page, idEmpresa) {
+
+
+        const movimentaestoque = await Movimentaestoque.query()
+            .select(['id_estoque', 'id_fornecedor', 'numerocontrole', 'data', 'datavencimento', 'datanfe', 'embalagemindea',
+                'enviado', 'nomeagrotoxico', 'id_agrotoxico', 'nomeembalagem', 'tipoembalagem', 'unidademmbalagem', 'id_embalagem','nomeresponsaveltecnico',
+                'tipomovimentacao', 'json', 'notafiscal', 'numlote', 'observacao', 'quantidade', 'receita', 'registroagrotox', 'serie', 'statussc',])
+            .where('id_empresa', '=', idEmpresa)
+            .andWhere('data', '>=', dataInit)
+            .andWhere('data', '<=', dataFinal)
+            
+            .paginate(page, 5)
+
+        console.log(movimentaestoque)
+
+        return movimentaestoque
+    }
+    static async indexByParamsDate(texto,filtro, dataInit, dataFinal, page, idEmpresa) {
+
+
+        const movimentaestoque = await Movimentaestoque.query()
+            .select(['id_estoque', 'id_fornecedor', 'numerocontrole', 'data', 'datavencimento', 'datanfe', 'embalagemindea',
+                'enviado', 'nomeagrotoxico', 'id_agrotoxico', 'nomeembalagem', 'tipoembalagem', 'unidademmbalagem', 'id_embalagem','nomeresponsaveltecnico',
+                'tipomovimentacao', 'json', 'notafiscal', 'numlote', 'observacao', 'quantidade', 'receita', 'registroagrotox', 'serie', 'statussc',])
+            .where('id_empresa', '=', idEmpresa)
+            .andWhere('data', '>=', dataInit)
+            .andWhere('data', '<=', dataFinal)
+            .andWhere(filtro, 'like', `%${texto}%`)
+            .orderBy(filtro, 'asc')
+            .paginate(page, 5)
+
+        console.log(movimentaestoque)
+
+        return movimentaestoque
+    }
+
+    static async inventario(dados, page, idEmpresa) {
+
+        const movimentaestoque = await Movimentaestoque.query()
+            .sum('quantidade as quantidade')
+            .select(['id_estoque',
+                'nomeagrotoxico', 'id_agrotoxico', 'nomeembalagem', 'tipoembalagem', 'unidademmbalagem'])
+            .where('id_empresa', '=', idEmpresa)
+            .andWhere('nomeembalagem', '=', dados.nomeembalagem)
+            .andWhere('tipoembalagem', '=', dados.tipoembalagem)
+            .andWhere('unidademmbalagem', '=', dados.unidademmbalagem)
+            .paginate(page, 5)
+        console.log(movimentaestoque)
+
+        return movimentaestoque[0]
+    }
 
 }
