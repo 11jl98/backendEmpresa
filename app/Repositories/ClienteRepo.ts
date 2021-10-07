@@ -13,7 +13,6 @@ export default class PropriedadesRepositories {
             .andWhere(filtro, 'like', `%${texto}%`)
             .orderBy(filtro, 'asc')
             .paginate(page, 5)
-        console.log(cliente)
 
         return cliente
 
@@ -24,7 +23,6 @@ export default class PropriedadesRepositories {
     'numero','cidade','uf','cep','telefone','email','iepr','observacao','rgie'])
     .where('id_empresa', '=', idEmpresa)
     .paginate(page, 5)
-    console.log(cliente)
       
     return cliente
 

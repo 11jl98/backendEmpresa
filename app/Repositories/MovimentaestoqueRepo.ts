@@ -9,7 +9,6 @@ export default class PropriedadesRepositories {
          idEstoque: uuid,
          idEmpresa: idEmpresa,
      })
-     console.log(movimentaestoque)
         return movimentaestoque
 
     }
@@ -22,7 +21,6 @@ export default class PropriedadesRepositories {
                 'tipomovimentacao', 'json', 'notafiscal', 'numlote', 'observacao', 'quantidade', 'receita', 'registroagrotox', 'serie', 'statussc',])
             .where('id_empresa', '=', idEmpresa)
             .paginate(page, 5)
-        console.log(movimentaestoque)
 
         return movimentaestoque
     }
@@ -38,7 +36,6 @@ export default class PropriedadesRepositories {
             .orderBy(filtro, 'asc')
             .paginate(page, 5)
 
-        console.log(movimentaestoque)
 
         return movimentaestoque
     }
@@ -56,7 +53,6 @@ export default class PropriedadesRepositories {
             
             .paginate(page, 5)
 
-        console.log(movimentaestoque)
 
         return movimentaestoque
     }
@@ -74,7 +70,6 @@ export default class PropriedadesRepositories {
             .orderBy(filtro, 'asc')
             .paginate(page, 5)
 
-        console.log(movimentaestoque)
 
         return movimentaestoque
     }
@@ -90,7 +85,6 @@ export default class PropriedadesRepositories {
             .andWhere('tipoembalagem', '=', dados.tipoembalagem)
             .andWhere('unidademmbalagem', '=', dados.unidademmbalagem)
             .paginate(page, 5)
-        console.log(movimentaestoque)
 
         return movimentaestoque[0]
     }

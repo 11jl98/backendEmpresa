@@ -46,6 +46,5 @@ class ClienteValidatorUpdate {
   
 	public messages = {}
   }
-console.log(ClienteValidatorStore)
 
   export default {ClienteValidatorStore, ClienteValidatorUpdate}

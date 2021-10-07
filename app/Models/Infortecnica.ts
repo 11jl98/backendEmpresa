@@ -136,6 +136,15 @@ export default class InfortecnicaReceitas extends BaseModel {
   @column()
   public volumecalda: string
 
+  @column()
+  public volumecaldabula: string
+
+  @column()
+  public dosagembula: string
+
+  @column()
+  public solo: string
+
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
 

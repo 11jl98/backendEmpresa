@@ -88,7 +88,6 @@ export default class MovimentaestoquesController {
       idEmpresa: id,
       idEstoque: uuid()
     })
-    console.log(typeof (estoque.data), estoque.data)
     return estoque
   }
 
@@ -154,7 +153,6 @@ export default class MovimentaestoquesController {
   //   let page = params.page
   //   const dados = request.only(['nomeembalagem', 'tipoembalagem', 'unidadeembalagem'])
 
-  //   console.log(dados)
 
   //   const inventario = await MovimentaetoqueRepo.inventario(dados, page, id)
   //   return inventario

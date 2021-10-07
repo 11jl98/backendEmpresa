@@ -24,7 +24,6 @@ export default class PropriedadesController {
     const user = await auth.authenticate()
     const id = user.id
     const data = await request.validate(PropriedadeValidator.PropriedadeValidatorStore)
-      console.log(data)
     const propriedade = await Propriedade.create({
       ...data,
       idEmpresa: id,

@@ -46,7 +46,6 @@ export default class FornecedorController {
       idFornecedor: Uuid
     })
     fornecedor.idFornecedor = Uuid
-    console.log(fornecedor)
     return fornecedor
   }
 

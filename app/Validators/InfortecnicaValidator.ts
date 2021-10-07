@@ -45,7 +45,10 @@ export default class InfortecnicaValidator {
 	quantidadeadquirir: schema.string.optional({trim: true}),
 	registroagrotoxico: schema.string.optional({trim: true}),
 	tipoaplicacao: schema.string.optional({trim: true}),
-	volumecalda: schema.string.optional({trim: true})
+	volumecalda: schema.string.optional({trim: true}),
+	volumecaldabula: schema.string.optional({trim: true}),
+	dosagembula: schema.string.optional({trim: true}),
+	solo: schema.string.optional({trim: true}),
   })
 
 	

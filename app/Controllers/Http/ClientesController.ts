@@ -50,7 +50,6 @@ export default class ClientesController {
       idCliente: Uuid,
       ...data 
     })
-    console.log(cliente)
     cliente.idCliente = Uuid
 
     return cliente
@@ -67,7 +66,6 @@ export default class ClientesController {
       
     cliente.merge(data)
     await cliente.save()
-    console.log(cliente)
     return cliente
   }
 

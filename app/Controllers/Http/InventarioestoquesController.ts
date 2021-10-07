@@ -22,7 +22,6 @@ export default class InventarioestoquesController {
 
   public async show({ }: HttpContextContract) {
     const estoque = await Estoque.all()
-    console.log(estoque)
 
     const est = estoque.reduce((acc, current) => {
         acc['entrada'] = acc['entrada']|| []
@@ -44,7 +43,6 @@ export default class InventarioestoquesController {
     const estoque = await Estoque.query()
     .where('data', '>=', params.dataInit)
     .andWhere('data', '<=', params.dataFinal)
-    console.log(estoque, params.dataInit, params.dataFinal)
 
     const est = estoque.reduce((acc, current) => {
         acc['entrada'] = acc['entrada']|| []
@@ -58,7 +56,6 @@ export default class InventarioestoquesController {
       }
       return acc
     }, {})
-  console.log(est)
     return est
   }
   

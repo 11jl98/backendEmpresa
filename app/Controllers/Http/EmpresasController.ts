@@ -8,9 +8,7 @@ export default class EmpresasController {
   public async store ({request, auth}: HttpContextContract) {
     const user = await auth.authenticate()
     const id = user.id
-    console.log('chegou aqui')
     const data = await request.validate(EmpresaValidator.EmpresaValidatorStore)
-    console.log('chegou aqui')
 
     const empresa = await Empresa.create({
       idEmpresa: id,
