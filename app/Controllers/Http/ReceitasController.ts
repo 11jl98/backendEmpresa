@@ -68,7 +68,7 @@ export default class ReceitasController {
   public async show ({params, auth}: HttpContextContract) {
     const user = await auth.authenticate()
     const id = user.id
-    const receitas = await ReceitaRepo.show(params.id, id)
+    const receitas = await ReceitaRepo.show(params.id)
 
     await receitas.preload('cliente')
     await receitas.preload('propriedade')
@@ -89,8 +89,16 @@ export default class ReceitasController {
     return receitas
   }
 
-  public async destroy ({params}: HttpContextContract) {
+  public async destroy ({params, auth, response}: HttpContextContract) {
+    const user = await auth.authenticate()
+    const id = user.id
     const receitas = await Receitas.findOrFail(params.id)
-    receitas.delete()
+    const receitasInfo = await ReceitaRepo.deleteInfoByReceita(params.id, id)
+    console.log(receitasInfo)
+    if(receitasInfo.length > 0 ){
+      console.log('ta aqui')
+      return response.status(409)
+    }
+    await receitas.delete() 
   }
 }

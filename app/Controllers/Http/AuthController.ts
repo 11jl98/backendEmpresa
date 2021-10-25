@@ -3,9 +3,9 @@ import Axios from '../../../utils/api'
 
 export default class AuthController {
   public async store ({ request, auth }: HttpContextContract) {
-    const data = request.body()
+    const dataBody = request.body()
 
-    const json = JSON.parse(data as unknown as string)
+    // const json = JSON.parse(data as unknown as string)
 
     const dadosGestao = {
       CNPJ:"03054436000151",
@@ -23,7 +23,7 @@ export default class AuthController {
       return error
     }
 
-    const token = auth.attempt(json.login, json.password, {
+    const token = auth.attempt(dataBody.login, dataBody.password, {
       expiresIn:'30 days',
     })
     return token

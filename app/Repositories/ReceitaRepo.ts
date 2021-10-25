@@ -1,4 +1,5 @@
 import Receitas from 'App/Models/Receita'
+import Infortecnica from 'App/Models/Infortecnica'
 
 export default class ReceitaRepositories {
 
@@ -49,9 +50,15 @@ export default class ReceitaRepositories {
             .paginate(page, 5)
         return receitas
     }
-    static async show(idReceita, idEmpresa) {
+    static async show(idReceita) {
         const receitas = await Receitas.findOrFail(idReceita)
         return receitas
+    }
+    static async deleteInfoByReceita(idReceita,idEmpresa){
+        const info = await Infortecnica.query().select()
+        .where('id_receita', '=', idReceita)
+        .andWhere('id_empresa', '=', idEmpresa)
+        return info
     }
 }
 

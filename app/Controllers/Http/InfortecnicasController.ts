@@ -26,6 +26,7 @@ export default class InfortecnicaReceitasController {
     const Uuid = uuid()
 
     const data = await request.validate(InfortecnicaValidator)
+    console.log(data)
     const info = await Infortecnica.create({
       ...data,
       idEmpresa: id,
@@ -33,6 +34,7 @@ export default class InfortecnicaReceitasController {
     })
     info.idInfortecnica = Uuid
     await info.preload('receita')
+    const quantidade = parseFloat(info.quantembal)
     const movEstoque ={
       id_infortecnica: info.idInfortecnica,
       data:info.receita.data,
@@ -45,13 +47,13 @@ export default class InfortecnicaReceitasController {
       tipomovimentacao:'VENDA',
       notafiscal:info.receita.notafiscal,
       numlote:info.lote,
-      quantidade:-(info.quantembal),
+      quantidade: (-quantidade),
       receita:info.receita.numeroreceita,
       registroagrotox:info.registroagrotoxico,
       serie:info.receita.serie, 
     }
     await MovimentaestoqueRepo.storeMovReceita(movEstoque, id, Uuid)
-
+    console.log('ta aqui ',info)
     return info
   }
 

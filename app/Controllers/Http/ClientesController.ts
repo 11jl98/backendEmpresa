@@ -41,6 +41,7 @@ export default class ClientesController {
   
   public async store ({ request, auth }: HttpContextContract) {
     const user = await auth.authenticate()
+   
     const id = user.id
 
     const data = await request.validate(ClienteVaidator.ClienteValidatorStore)
