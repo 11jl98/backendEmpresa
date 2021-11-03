@@ -13,14 +13,27 @@ class EmpresaValidatorStore {
 	bairro:schema.string({trim: true}),
 	numero: schema.string({trim: true}),
 	cidade: schema.string({trim: true}),
-	UF:schema.string({trim: true}),
+	uf:schema.string({trim: true}),
 	cep: schema.string({trim: true}),
 	telefone:schema.string({trim: true}, [rules.maxLength(11)]),
 	email:schema.string({trim: true}, [rules.email()]),
 	ie: schema.string({trim: true}),
   })
 
-  public messages = {}
+  public messages = {
+	  'nomeempresa.required':'Razão social não pode ficar em branco',
+	  'nomefantasia.required':'Nome empresa não pode ficar em branco',
+	  'cpfcnpj.required':'CPF/CNPJ não pode ficar em branco, e deve conter 11 ou 14 caracteres',
+	  'endereco.required':'Endereço não pode ficar em branco',
+	  'bairro.required':'Bairro não pode ficar em branco',
+	  'numero.required':'Número não pode ficar em branco',
+	  'cidade.required':'Cidade não pode ficar em branco',
+	  'uf.required':'UF não pode ficar em branco',
+	  'uf.cep':'CEP não pode ficar em branco',
+	  'telefone.required':'Número de telefone não valido digite o DDD digito 9  e os demais digitos',
+	  'email.required':'Email precisa ser um email válido',
+	  'ie.required':'Inscrição estadual não pode ficar em branco',
+  }
 }
 
 class EmpresaValidatorUpdate {
@@ -30,19 +43,32 @@ class EmpresaValidatorUpdate {
 	public schema = schema.create({
 	  nomeempresa: schema.string({trim: true}),
 	  nomefantasia: schema.string({trim: true}),
-	  cpfcnpj:schema.string({trim: true},[rules.minLength(11), rules.maxLength(25)]),
+	  cpfcnpj:schema.string({trim: true}),
 	  endereco:schema.string({trim: true}),
 	  bairro:schema.string({trim: true}),
 	  numero: schema.string({trim: true}),
 	  cidade: schema.string({trim: true}),
-	  UF:schema.string({trim: true}),
+	  uf:schema.string({trim: true}),
 	  cep: schema.string({trim: true}),
 	  telefone:schema.string({trim: true}, [rules.maxLength(11)]),
 	  email:schema.string({trim: true}, [rules.email()]),
 	  ie: schema.string({trim: true}),
 	})
   
-	public messages = {}
+	public messages = {
+		'nomeempresa.required':'Razão social não pode ficar em branco',
+		'nomefantasia.required':'Nome empresa não pode ficar em branco',
+		'cpfcnpj.required':'CPF/CNPJ não pode ficar em branco, e deve conter 11 ou 14 caracteres',
+		'endereco.required':'Endereço não pode ficar em branco',
+		'bairro.required':'Bairro não pode ficar em branco',
+		'numero.required':'Número não pode ficar em branco',
+		'cidade.required':'Cidade não pode ficar em branco',
+		'uf.required':'UF não pode ficar em branco',
+		'uf.cep':'CEP não pode ficar em branco',
+		'telefone.required':'Número de telefone não valido digite o DDD digito 9  e os demais digitos',
+		'email.required':'Email precisa ser um email válido',
+		'ie.required':'Inscrição estadual não pode ficar em branco',
+	}
   }
 
   export default {EmpresaValidatorStore, EmpresaValidatorUpdate}

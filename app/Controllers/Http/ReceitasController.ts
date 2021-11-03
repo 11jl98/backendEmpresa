@@ -65,9 +65,7 @@ export default class ReceitasController {
     return receitas
   }
 
-  public async show ({params, auth}: HttpContextContract) {
-    const user = await auth.authenticate()
-    const id = user.id
+  public async show ({params}: HttpContextContract) {
     const receitas = await ReceitaRepo.show(params.id)
 
     await receitas.preload('cliente')

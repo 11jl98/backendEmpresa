@@ -5,16 +5,16 @@ class ReceitaValidatorStore {
 	}
 
 	public schema = schema.create({
-		id_cliente: schema.string.optional(),
-		id_propriedade: schema.string.optional(),
-		id_responsavel: schema.string.optional(),
-		numeroreceita:schema.string.optional({trim: true}),
-		numeroart:schema.string.optional({trim: true}),
-		data:schema.string.optional({trim: true}),
+		id_cliente: schema.string(),
+		id_propriedade: schema.string(),
+		id_responsavel: schema.string(),
+		numeroreceita:schema.string({trim: true}),
+		numeroart:schema.string({trim: true}),
+		data:schema.string({trim: true}),
 		statusreceita:schema.string.optional({trim: true}),
 		observacao:schema.string.optional({trim: true}),
 		obsmip:schema.string.optional({trim: true}),
-		notafiscal:schema.string.optional({trim: true}),
+		notafiscal:schema.string({trim: true}),
 		serie:schema.string.optional({trim: true}),
 		valor:schema.string.optional({trim: true}),
 		datafinal:schema.string.optional({trim: true}),
@@ -33,7 +33,18 @@ class ReceitaValidatorStore {
 		contrato: schema.string.optional({trim: true})
   })
 
-	public messages = {}
+	public messages = {
+		'id_cliente.required':'Selecione um cliente para prosseguir',
+		'id_propriedade.required': 'Selecione uma propriedade para prosseguir',
+		'id_responsavel.required': 'Selecione uma responsável para prosseguir',
+		'numeroreceita.required': 'número da receita é obrigatório',
+		'numeroart.required':'número de ART para prosseguir',
+		'data.required':'data não foi preenchida',
+		'notafiscal.required':'número de nota fiscal é obrigatório',
+		'serie.required':'número de série é obrigatório',
+		'complementoreceita.required':'complemento da receita é obrigatório',
+		'datanfe.required':'data da NF-e não foi preenchida',
+	}
 }
 class ReceitaValidatorUpdate {
 	constructor(protected ctx: HttpContextContract) {
@@ -53,7 +64,7 @@ class ReceitaValidatorUpdate {
 		notafiscal:schema.string({trim: true}),
 		serie:schema.string({trim: true}),
 		valor:schema.string.optional({trim: true}),
-		datafinal:schema.string({trim: true}),
+		datafinal:schema.string.optional({trim: true}),
 		statussc:schema.string.optional({trim: true}),
 		jsonsc:schema.string.optional({trim: true}),
 		codretsc:schema.string.optional({trim: true}),
@@ -69,7 +80,18 @@ class ReceitaValidatorUpdate {
 		contrato: schema.string.optional({trim: true})
   })
 
-	public messages = {}
+	public messages = {
+		'id_cliente.required':'Selecione um cliente para prosseguir',
+		'id_propriedade.required': 'Selecione uma propriedade para prosseguir',
+		'id_responsavel.required': 'Selecione uma responsável para prosseguir',
+		'numeroreceita.required': 'número da receita é obrigatório',
+		'numeroart.required':'número de ART para prosseguir',
+		'data.required':'data não foi preenchida',
+		'notafiscal.required':'número de nota fiscal é obrigatório',
+		'serie.required':'número de série é obrigatório',
+		'complementoreceita.required':'complemento da receita é obrigatório',
+		'datanfe.required':'data da NF-e não foi preenchida',
+	}
 }
 
 export default {ReceitaValidatorStore, ReceitaValidatorUpdate}

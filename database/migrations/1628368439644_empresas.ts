@@ -20,6 +20,7 @@ export default class Empresas extends BaseSchema {
       table.string('telefone2',15)
       table.string('email',100)
       table.string('ie',20)
+      table.string('avatar_logo')
       table.timestamps(true)
     })
   }

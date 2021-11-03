@@ -47,6 +47,9 @@ export default class Empresa extends BaseModel {
   @column()
   public ie: string
 
+  @column()
+  public avatar_logo: string
+
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
 
