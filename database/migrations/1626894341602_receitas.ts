@@ -35,6 +35,8 @@ export default class Receitas extends BaseSchema {
       table.string('protocolors')
       table.string('protocolocancelamentors')
       table.string('contrato')
+      table.string('nomecliente', 200)
+      table.string('nomeresponsavel', 200)
       table.timestamp('created_at', { useTz: true })
       table.timestamp('updated_at', { useTz: true })
     })

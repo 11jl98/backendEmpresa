@@ -30,7 +30,9 @@ class ReceitaValidatorStore {
 		datanfe:schema.string({trim: true}),
 		protocolors:schema.string.optional({trim: true}),
 		protocolocancelamentors:schema.string.optional({trim: true}),
-		contrato: schema.string.optional({trim: true})
+		contrato: schema.string.optional({trim: true}),
+		nomecliente:schema.string({trim: true}),
+		nomeresponsavel:schema.string({trim: true})
   })
 
 	public messages = {
@@ -77,7 +79,9 @@ class ReceitaValidatorUpdate {
 		datanfe:schema.string({trim: true}),
 		protocolors:schema.string.optional({trim: true}),
 		protocolocancelamentors:schema.string.optional({trim: true}),
-		contrato: schema.string.optional({trim: true})
+		contrato: schema.string.optional({trim: true}),
+		nomecliente:schema.string({trim: true}),
+		nomeresponsavel:schema.string({trim: true})
   })
 
 	public messages = {

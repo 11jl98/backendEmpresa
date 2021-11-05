@@ -101,6 +101,12 @@ export default class Receita extends BaseModel {
   @column()
   public contrato: string
 
+  @column()
+  public nomecliente: string
+
+  @column()
+  public nomeresponsavel: string
+
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
 
