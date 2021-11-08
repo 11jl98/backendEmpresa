@@ -8,6 +8,7 @@ export default class EmpresasController {
     const user = await auth.authenticate()
     const id = user.id
     const empresa = await Empresa.query().select().where('id_empresa','=', id)
+    console.log(empresa)
     return empresa
 
   }
