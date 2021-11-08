@@ -11,7 +11,7 @@ export default class InfortecnicaValidator {
 	areatratar: schema.string({trim: true}),
 	classetoxico: schema.string.optional({trim: true}),
 	classificacaocultura: schema.string.optional({trim: true}),
-	codcultura: schema.string({trim: true}),
+	codcultura: schema.string.optional({trim: true}),
 	concentracao: schema.string.optional({trim: true}),
 	dosagem: schema.string({trim: true}),
 	epi: schema.string.optional({trim: true}),
@@ -55,7 +55,6 @@ export default class InfortecnicaValidator {
   public messages = {
 	'id_receita.required': 'Selecione uma receita para adicionar um produto',
 	'areatratar.required': 'Área a tratar deve ser preenchido',
-	'codcultura.required': 'Obrigatório informar o código da cultura',
 	'dosagem.required': 'Obrigatório informar a desagem',
 	'nomeembalagem.required': 'Obrigatório informar o nome da embalagem',
 	'tipoembalagem.required': 'Obrigatório informar o tipo da embalagem',
