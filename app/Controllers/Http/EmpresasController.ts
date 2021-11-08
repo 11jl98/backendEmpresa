@@ -7,7 +7,8 @@ export default class EmpresasController {
   public async index ({auth}: HttpContextContract) {
     const user = await auth.authenticate()
     const id = user.id
-    const empresa = await Empresa.query().select().where('id_empresa','=', id)
+    const empresa = await Empresa.query().select('nomeempresa','nomefantasia','cpfcnpj','endereco','bairro','numero','cidade','uf','cep','telefone','email','ie','avatar_logo').where('id_empresa','=', id)
+
     console.log(empresa)
     return empresa
 

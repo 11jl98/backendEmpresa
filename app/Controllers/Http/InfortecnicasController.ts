@@ -37,13 +37,14 @@ export default class InfortecnicaReceitasController {
     const quantidade = parseFloat(info.quantembal)
     const movEstoque ={
       id_infortecnica: info.idInfortecnica,
+      id_agrotoxico: info.idAgrotoxico,
       data:info.receita.data,
       datanfe: info.receita.datanfe,
+      datavencimento: info.receita.datanfe,
       nomeagrotoxico: info.nomeagrotoxico,
       nomeembalagem: info.nomeembalagem,
       tipoembalagem: info.tipoembalagem,
       unidademmbalagem: info.unidademmbalagem,
-      nomeresponsaveltecnico:info.receita.nome,
       tipomovimentacao:'VENDA',
       notafiscal:info.receita.notafiscal,
       numlote:info.lote,
@@ -51,6 +52,7 @@ export default class InfortecnicaReceitasController {
       receita:info.receita.numeroreceita,
       registroagrotox:info.registroagrotoxico,
       serie:info.receita.serie, 
+      nomeresponsaveltecnico: info.receita.nomeresponsavel
     }
     await MovimentaestoqueRepo.storeMovReceita(movEstoque, id, Uuid)
     console.log('ta aqui ',info)

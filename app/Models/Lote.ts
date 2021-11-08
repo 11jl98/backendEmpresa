@@ -11,7 +11,25 @@ export default class Lote extends BaseModel {
   public user: BelongsTo<typeof User>
 
   @column()
+  public id_agrotoxico: Number
+
+  @column()
+  public nomeagrotoxico: string
+
+  @column()
+  public embalagem: string
+
+  @column()
+  public unidadeembalagem: string
+
+  @column()
+  public capacidadeembalagem: string
+
+  @column()
   public numlote: string
+
+  @column()
+  public datavencimento: string
 
   @column()
   public observacao: string

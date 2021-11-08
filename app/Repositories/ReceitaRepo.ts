@@ -18,7 +18,7 @@ export default class ReceitaRepositories {
     static async indexPaginate(page, idEmpresa) {
         const receitas = await Receitas.query().select(['id_receita','id_cliente', 'id_propriedade', 'id_responsavel', 'numeroreceita', 'numeroart',
             'data', 'nome', 'statusreceita', 'observacao', 'obsmip', 'notafiscal', 'serie', 'valor', 'datafinal', 'statussc', 'jsonsc', 'codretsc',
-            'enviado', 'devolucao', 'cogoias', 'seriesc', 'complementoreceita', 'chavenfe', 'datanfe', 'protocolors', 'protocolocancelamentors', 'contrato'])
+            'enviado', 'devolucao', 'cogoias', 'seriesc', 'complementoreceita', 'chavenfe', 'datanfe', 'protocolors', 'protocolocancelamentors', 'contrato','nomecliente', 'nomeresponsavel'])
             .where('id_empresa', '=', idEmpresa)
             .preload('cliente')
             .preload('responsavel')

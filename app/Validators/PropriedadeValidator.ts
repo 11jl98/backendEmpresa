@@ -7,9 +7,9 @@ class PropriedadeValidatorStore {
 	public schema = schema.create({
 		id_cliente: schema.string({}),
 		nomepropriedade: schema.string({trim: true}),
-		cpfcnpj:schema.string({trim: true},[rules.minLength(11), rules.maxLength(25)]),
-		iepr: schema.string({trim: true}),
-		rgie:schema.string({trim: true}),
+		cpfcnpj:schema.string.optional({trim: true},[rules.minLength(11), rules.maxLength(25)]),
+		iepr: schema.string.optional({trim: true}),
+		rgie:schema.string.optional({trim: true}),
 		endereco: schema.string({trim: true}),
 		bairro: schema.string({trim: true}),
 		numero: schema.string({trim: true}),
