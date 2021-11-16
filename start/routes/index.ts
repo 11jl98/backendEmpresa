@@ -11,6 +11,7 @@ import './responsavel'
 import './inventario'
 import './empresa'
 import './retorno'
+import './lote'
 Route.get('/', async () => {
   return { hello: 'world' }
 })

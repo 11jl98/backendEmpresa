@@ -21,6 +21,7 @@ export default class Clientes extends BaseSchema {
       table.string('observacao',1000)
       table.string('rgie',20)
       table.string('status',20)
+      table.string('codibge', 20)
       table.timestamp('created_at', { useTz: true })
       table.timestamp('updated_at', { useTz: true })
     })

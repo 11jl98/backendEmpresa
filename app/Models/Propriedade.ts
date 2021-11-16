@@ -59,7 +59,9 @@ export default class Propriedade extends BaseModel {
   @column()
   public longitude: string
 
-
+  @column()
+  public codibge: string
+  
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
 

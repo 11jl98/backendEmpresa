@@ -20,6 +20,7 @@ export default class Fornecedor extends BaseSchema {
       table.string('email',100)
       table.string('ie',20)
       table.text('observacao','longtext')
+      table.string('codibge', 20)
       table.timestamp('created_at', { useTz: true })
       table.timestamp('updated_at', { useTz: true })
     })

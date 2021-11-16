@@ -72,6 +72,9 @@ export default class ResponsavelTecnico extends BaseModel {
 
   @column()
   public contrato: string
+  
+  @column()
+  public codibge: string
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime

@@ -18,6 +18,8 @@ class PropriedadeValidatorStore {
 		cep: schema.string({trim: true}),
 		latitude: schema.string({trim: true}),
 		longitude: schema.string({trim: true}),
+		codibge:schema.string({trim: true})
+
 	})
 
 	public messages = {}
@@ -40,6 +42,8 @@ class PropriedadeValidatorUpdate {
 		cep: schema.string({trim: true}),
 		latitude: schema.string({trim: true}),
 		longitude: schema.string({trim: true}),
+		codibge:schema.string({trim: true})
+
 	})
 
 	public messages = {}

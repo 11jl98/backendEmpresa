@@ -11,7 +11,7 @@ export default class Lotes extends BaseSchema {
       table.string('nomeagrotoxico')
       table.string('embalagem')
       table.string('unidadeembalagem')
-      table.decimal('capacidadeembalagem')
+      table.string('capacidadeembalagem')
       table.string('numlote')
       table.string('datavencimento')
       table.text('observacao','longtext')

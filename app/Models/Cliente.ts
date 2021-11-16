@@ -51,6 +51,9 @@ export default class Cliente extends BaseModel {
 
   @column()
   public status: string
+  
+  @column()
+  public codibge: string
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime

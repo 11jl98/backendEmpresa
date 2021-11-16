@@ -29,6 +29,7 @@ export default class ResponsavelTecnicos extends BaseSchema {
       table.string('seriesc',50)
       table.string('conselho',50)
       table.string('contrato',50)
+      table.string('codibge', 20)
       table.timestamp('created_at', { useTz: true })
       table.timestamp('updated_at', { useTz: true })
     })

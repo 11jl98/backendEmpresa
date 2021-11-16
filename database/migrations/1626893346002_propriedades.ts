@@ -20,6 +20,7 @@ export default class Propriedades extends BaseSchema {
       table.string('cep',10)
       table.string('latitude',100)
       table.string('longitude',100)
+      table.string('codibge', 20)
       table.timestamp('created_at', { useTz: true })
       table.timestamp('updated_at', { useTz: true })
     })

@@ -3,6 +3,8 @@ import Receitas from 'App/Models/Receita'
 import ReceitasValidtor from 'App/Validators/ReceitaValidator'
 import {v4 as uuid} from 'uuid'
 import ReceitaRepo from 'App/Repositories/ReceitaRepo'
+import Responsavel from 'App/Models/ResponsavelTecnico'
+
 export default class ReceitasController {
   public async index ({ auth, params}: HttpContextContract) {
     const user = await auth.authenticate()
@@ -61,6 +63,11 @@ export default class ReceitasController {
       idEmpresa: id,
       idReceita: Uuid
     })
+    const responsavel = await Responsavel.findOrFail(receitas.idResponsavel)
+    responsavel.merge({
+      proximareceita: String(parseInt(receitas.numeroreceita)  + 1)
+    })
+    await responsavel.save()
     receitas.idReceita = Uuid
     return receitas
   }

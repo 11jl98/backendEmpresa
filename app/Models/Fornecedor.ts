@@ -49,6 +49,9 @@ export default class Fornecedor extends BaseModel {
 
   @column()
   public observacao: string
+  
+  @column()
+  public codibge: string
 
   @column.dateTime({ autoCreate: true })
   public createdAt: DateTime
