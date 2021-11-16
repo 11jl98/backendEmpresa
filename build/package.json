@@ -1,0 +1,36 @@
+{
+  "name": "backendempresa",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "build": "node ace build --production",
+    "start": "node server.js",
+    "dev": "node ace serve --watch",
+    "japa": "node -r @adonisjs/assembler/build/register japaFile.ts"
+  },
+  "devDependencies": {
+    "@adonisjs/assembler": "^5.3.5",
+    "@types/supertest": "^2.0.11",
+    "adonis-preset-ts": "^2.1.0",
+    "pino-pretty": "^5.1.2",
+    "supertest": "^6.1.4",
+    "typescript": "^4.2.4",
+    "youch": "^2.2.2",
+    "youch-terminal": "^1.1.1"
+  },
+  "dependencies": {
+    "@adonisjs/auth": "^5.1.1",
+    "@adonisjs/core": "^5.1.11",
+    "@adonisjs/lucid": "^10.0.0",
+    "@adonisjs/repl": "^3.1.5",
+    "axios": "^0.21.4",
+    "luxon": "^2.0.1",
+    "mysql": "^2.18.1",
+    "nodemon": "^2.0.12",
+    "phc-argon2": "^1.1.2",
+    "proxy-addr": "^2.0.7",
+    "reflect-metadata": "^0.1.13",
+    "source-map-support": "^0.5.19",
+    "uuid": "^8.3.2"
+  }
+}
