@@ -14,7 +14,6 @@ export default class PropriedadesRepositories {
             .andWhere('embalagem', '=',  embalagem.trim() )
             .andWhere('capacidadeembalagem', '=', capacidadeEmbalagem.trim())
             .andWhere('unidadeembalagem', '=', unidadeEmbalagem.trim())
-            console.log(idEmpresa, idAgrotoxico)
 
         return lotes
 
