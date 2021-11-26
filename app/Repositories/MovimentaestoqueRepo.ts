@@ -1,6 +1,6 @@
 import Movimentaestoque from "App/Models/Movimentaestoque";
 
-export default class PropriedadesRepositories {
+export default class MovimentaestoqueRepositories {
 
     static async storeMovReceita(data, idEmpresa, uuid) {
      const movimentaestoque = await Movimentaestoque.create({
@@ -87,6 +87,18 @@ export default class PropriedadesRepositories {
             .paginate(page, 5)
 
         return movimentaestoque[0]
+    }
+    static async indexByDateSicca( dataInit, dataFinal, idEmpresa) {
+
+
+        const movimentaestoque = await Movimentaestoque.query()
+            .select(['id_estoque', 'id_fornecedor', 'id_infortecnica','numerocontrole', 'data', 'datanfe','unidademmbalagem', 'tipoembalagem',
+                'id_embalagem','tipomovimentacao', 'notafiscal', 'numlote', 'quantidade', 'receita', 'registroagrotox', 'serie'])
+            .where('id_empresa', '=', idEmpresa)
+            .andWhere('data', '>=', dataInit)
+            .andWhere('data', '<=', dataFinal)
+            
+        return movimentaestoque
     }
 
 }

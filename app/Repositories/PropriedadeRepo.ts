@@ -20,4 +20,11 @@ export default class PropriedadesRepositories {
         .andWhere('id_empresa', '=', idEmpresa)
         return propriedade
     }
+    static async indexSicca(idPropriedade, idEmpresa){
+        const propriedade = await Propriedade.query().select(['nomepropriedade'])
+        .where('id_propriedade', '=', idPropriedade)
+        .andWhere('id_empresa', '=', idEmpresa)
+        .first()
+        return propriedade
+    }
 }

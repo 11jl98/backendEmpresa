@@ -2,7 +2,7 @@ import Lote from 'App/Models/Lote'
 
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 
-export default class PropriedadesRepositories {
+export default class LoteRepositories {
 
     constructor(protected ctx: HttpContextContract) {
     }

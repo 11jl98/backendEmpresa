@@ -1,7 +1,7 @@
 import Cliente from 'App/Models/Cliente'
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 
-export default class PropriedadesRepositories {
+export default class Clienterepositories {
 
     constructor(protected ctx: HttpContextContract) {
     }
@@ -26,5 +26,11 @@ export default class PropriedadesRepositories {
       
     return cliente
 
+    }
+    static async indexFindBySelectSicca(idEmpresa, idCliente) {
+        const cliente = await Cliente.query().select(['nome', 'cpfcnpj', 'endereco','bairro','numero', 'codibge'])
+        .where('id_empresa', '=', idEmpresa)
+        .andWhere('id_cliente', '=', idCliente).first()
+        return cliente
     }
 }
