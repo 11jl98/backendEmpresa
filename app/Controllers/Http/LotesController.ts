@@ -20,6 +20,22 @@ export default class LotesController {
     
     return lotes
   }
+  public async indexNum ({params, auth}: HttpContextContract) {
+    const user = await auth.authenticate()
+    const id = user.id
+    const id_agrotoxico = params.idAgrotoxico
+    let embalagem = params.embalagem
+    let unidademmbalagem = params.unidademmbalagem
+    let capacidadeembalagem = params.capacidadeembalagem
+    let numlote = params.numlote
+
+    embalagem = decodeURIComponent(embalagem)
+    console.log(embalagem, "auiosi")
+
+    const lotes = await LoteRepo.indexNum(id_agrotoxico, embalagem, capacidadeembalagem, unidademmbalagem,numlote, id)
+    
+    return lotes
+  }
 
   public async store ({request, auth}: HttpContextContract) {
     const user = await auth.authenticate()
