@@ -7,7 +7,7 @@ class PropriedadeValidatorStore {
 	public schema = schema.create({
 		id_cliente: schema.string({}),
 		nomepropriedade: schema.string({trim: true}),
-		cpfcnpj:schema.string.optional({trim: true},[rules.minLength(11), rules.maxLength(25)]),
+		cpfcnpj:schema.string.optional({trim: true},[rules.minLength(14), rules.maxLength(18)]),
 		iepr: schema.string.optional({trim: true}),
 		rgie:schema.string.optional({trim: true}),
 		endereco: schema.string({trim: true}),
@@ -31,7 +31,7 @@ class PropriedadeValidatorUpdate {
 	public schema = schema.create({
 		id_cliente: schema.string({}),
 		nomepropriedade: schema.string({trim: true}),
-		cpfcnpj:schema.string({trim: true}),
+		cpfcnpj:schema.string({trim: true},[rules.minLength(14), rules.maxLength(18)]),
 		iepr: schema.string({trim: true}),
 		rgie:schema.string({trim: true}),
 		endereco: schema.string({trim: true}),

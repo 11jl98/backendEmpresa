@@ -2,16 +2,29 @@ import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Empresa from 'App/Models/Empresa'
 import EmpresaValidator from 'App/Validators/EmpresaValidator'
 import {v4 as uuid} from 'uuid'
+import Application from '@ioc:Adonis/Core/Application'
 
 export default class EmpresasController {
   public async index ({auth}: HttpContextContract) {
     const user = await auth.authenticate()
     const id = user.id
-    const empresa = await Empresa.query().select('nomeempresa','nomefantasia','cpfcnpj','endereco','bairro','numero','cidade','uf','cep','telefone','email','ie','avatar_logo').where('id_empresa','=', id)
+    const empresa = await Empresa.query().select('id_cadastro','nomeempresa','nomefantasia','cpfcnpj','endereco','bairro','numero','cidade','uf','codibge','cep','telefone','email','ie','avatar_logo').where('id_empresa','=', id)
 
     console.log(empresa)
     return empresa
+  }
 
+  public async storeToLogo({request, auth}: HttpContextContract){
+    const user = await auth.user!
+    const file =  request.file('ovo')
+    console.log(file)
+
+    if (file) {
+      await file.move(Application.makePath('uploads/'),{
+        name: file.fieldName,
+        overwrite:true
+      })
+    }
   }
 
   public async store ({request, auth}: HttpContextContract) {
@@ -19,7 +32,6 @@ export default class EmpresasController {
     const id = user.id
     const Uuid = uuid()
     const data = await request.validate(EmpresaValidator.EmpresaValidatorStore)
-
     const empresa = await Empresa.create({
       idEmpresa: id,
       idCadastro: Uuid,
@@ -37,6 +49,7 @@ export default class EmpresasController {
 
   public async update ({request, params}: HttpContextContract) {
     const empresa = await Empresa.findOrFail(params.id)
+
     const data = await request.validate(EmpresaValidator.EmpresaValidatorUpdate)
     empresa.merge(data)
     await empresa.save()

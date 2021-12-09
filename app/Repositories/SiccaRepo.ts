@@ -52,7 +52,7 @@ export default class SiccaRepositories {
              if(elem.idInfortecnica !== null){
                 infortecnica = await infortecnicaSiccaRepo.index(elem.idInfortecnica, idEmpresa)
                 receita = await receitaRepo.show(infortecnica.idReceita)
-                
+
                 cliente = await ClienteRepo.indexFindBySelectSicca(idEmpresa, receita.idCliente)
                 razaoSocialOrNome = cliente.nome
                 cpfcnpj = cliente.cpfcnpj
@@ -99,7 +99,7 @@ export default class SiccaRepositories {
                 nomepropriedade: nomepropriedade.toUpperCase(),
                 ...dadosAgrot
             }
-            
+
         }))
         return relatorio
     }

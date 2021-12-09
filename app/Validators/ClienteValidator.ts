@@ -7,14 +7,14 @@ class ClienteValidatorStore {
 
 	public schema = schema.create({
 		nome: schema.string({ trim: true }),
-		cpfcnpj: schema.string({ trim: true }, [rules.minLength(11), rules.maxLength(25), rules.unique({ table: 'clientes', column: 'cpfcnpj' })]),
+		cpfcnpj: schema.string({ trim: true }, [rules.minLength(13), rules.maxLength(18), rules.unique({ table: 'clientes', column: 'cpfcnpj' })]),
 		endereco: schema.string({ trim: true }),
 		bairro: schema.string({ trim: true }),
 		numero: schema.string({ trim: true }),
 		cidade: schema.string({ trim: true }),
 		uf: schema.string({ trim: true }),
 		cep: schema.string({ trim: true }),
-		telefone: schema.string({ trim: true }, [rules.maxLength(11)]),
+		telefone: schema.string({ trim: true }, [rules.maxLength(14)]),
 		email: schema.string({ trim: true }, [rules.email()]),
 		iepr: schema.string({ trim: true }),
 		observacao: schema.string.optional({ trim: true }),
@@ -31,14 +31,14 @@ class ClienteValidatorUpdate {
 
 	public schema = schema.create({
 		nome: schema.string({ trim: true }),
-		cpfcnpj: schema.string({ trim: true }, [rules.minLength(11), rules.maxLength(25)]),
+		cpfcnpj: schema.string({ trim: true }, [rules.minLength(14), rules.maxLength(18)]),
 		endereco: schema.string({ trim: true }),
 		bairro: schema.string({ trim: true }),
 		numero: schema.string({ trim: true }),
 		cidade: schema.string({ trim: true }),
 		uf: schema.string({ trim: true }),
 		cep: schema.string({ trim: true }),
-		telefone: schema.string({ trim: true }, [rules.maxLength(11)]),
+		telefone: schema.string({ trim: true }, [rules.maxLength(14)]),
 		email: schema.string({ trim: true }, [rules.email()]),
 		iepr: schema.string({ trim: true }),
 		observacao: schema.string.optional({ trim: true }),
