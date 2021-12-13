@@ -15,10 +15,12 @@ class EmpresaValidatorStore {
 		cidade: schema.string({ trim: true }),
 		UF: schema.string({ trim: true }),
 		cep: schema.string({ trim: true }),
-		telefone: schema.string({ trim: true }, [rules.maxLength(14)]),
+		telefone: schema.string({ trim: true }, [rules.maxLength(15)]),
 		email: schema.string({ trim: true }, [rules.email()]),
 		ie: schema.string({ trim: true }),
 		codibge: schema.string({ trim: true }),
+		avatar_logo: schema.string.optional({ trim: true }),
+
 	})
 
 	public messages = {
@@ -51,10 +53,11 @@ class EmpresaValidatorUpdate {
 		cidade: schema.string({ trim: true }),
 		UF: schema.string({ trim: true }),
 		cep: schema.string({ trim: true }),
-		telefone: schema.string({ trim: true }, [rules.maxLength(14)]),
+		telefone: schema.string({ trim: true }, [rules.maxLength(15)]),
 		email: schema.string({ trim: true }, [rules.email()]),
 		ie: schema.string({ trim: true }),
 		codibge: schema.string({ trim: true }),
+		avatar_logo: schema.string.optional({ trim: true }),
 
 	})
 

@@ -1,9 +1,13 @@
 import { DateTime } from 'luxon'
 import Hash from '@ioc:Adonis/Core/Hash'
+import avatar from 'App/Models/AvatarLogo'
+
 import {
   column,
   beforeSave,
   BaseModel,
+  hasOne,
+  HasOne
 } from '@ioc:Adonis/Lucid/Orm'
 
 export default class User extends BaseModel {
@@ -34,4 +38,8 @@ export default class User extends BaseModel {
       user.password = await Hash.make(user.password)
     }
   }
+  @hasOne(()=>avatar,{
+    foreignKey:'idEmpresa'
+  })
+  public avatar: HasOne<typeof avatar>
 }
