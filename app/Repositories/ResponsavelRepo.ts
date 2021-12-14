@@ -10,7 +10,7 @@ export default class ResponsavelRepositories {
         const responsavel = await Responsavel.query()
             .select(['id_responsavel', 'nome', 'cpf', 'crea', 'endereco', 'bairro', 'numero', 'cidade', 'uf',
                 'cep', 'telefone', 'email', 'receitasart', 'proximareceita', 'artatual',
-                'observacao', 'profissao', 'tokensc', 'complementoreceita', 'seriesc', 'conselho', 'contrato'])
+                'observacao', 'profissao', 'tokensc', 'complementoreceita', 'seriesc', 'conselho', 'contrato' ,'codibge'])
             .where('id_empresa', '=', idEmpresa)
             .andWhere(filtro, 'like', `%${texto}%`)
             .orderBy(filtro, 'asc')
@@ -22,7 +22,7 @@ export default class ResponsavelRepositories {
         const responsavel = await Responsavel.query()
             .select(['id_responsavel', 'nome', 'cpf', 'crea', 'endereco', 'bairro', 'numero', 'cidade', 'uf',
                 'cep', 'telefone', 'email', 'receitasart', 'proximareceita', 'artatual',
-                'observacao', 'profissao', 'tokensc', 'complementoreceita', 'seriesc', 'conselho', 'contrato'])
+                'observacao', 'profissao', 'tokensc', 'complementoreceita', 'seriesc', 'conselho', 'contrato','codibge'])
             .where('id_empresa', '=', idEmpresa)
             .paginate(page, 5)
 

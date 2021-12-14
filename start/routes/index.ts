@@ -13,6 +13,7 @@ import './empresa'
 import './retorno'
 import './lote'
 import './sicca'
+import './configuração'
 Route.get('/', async () => {
   return { hello: 'world' }
 })
