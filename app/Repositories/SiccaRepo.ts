@@ -12,11 +12,10 @@ import moment from 'moment'
 export default class SiccaRepositories {
 
     static async index(dataInicial, dataFinal, idEmpresa) {
-
         const movimentaestoque = await MovimentaestoqueRepo.indexByDateSicca(dataInicial, dataFinal, idEmpresa)
 
-        const empresa = await Empresa.query().select('cpfcnpj').where('id_empresa','=', idEmpresa).first()
-
+        const empresa = await Empresa.query().select('cpfcnpj', 'codibge').where('id_empresa','=', idEmpresa).first()
+        console.log(empresa)
         let agrotoxicos = []
 
         const relatorio = await Promise.all(movimentaestoque.map(async (elem) => {
@@ -35,11 +34,11 @@ export default class SiccaRepositories {
             let nomepropriedade = ""
             let numnfe = elem.notafiscal
             let serie = elem.serie
-            let cnpjEmpresa = empresa?.cpfcnpj
+            let cnpjEmpresa = empresa?.cpfcnpj.replace('.', '').replace('.', '').replace('/', '').replace('-', '')
             let codibgeEmpresa = empresa?.codibge
             let dadosAgrot = {}
             let codembalagem;
-
+            let ultimonumreceita
             if(elem.idFornecedor !== null){
                 fornecedor = await fornecedorRepo.indexFindBySelectSicca(idEmpresa, elem.idFornecedor)
                 razaoSocialOrNome = fornecedor.nome
@@ -52,18 +51,18 @@ export default class SiccaRepositories {
              if(elem.idInfortecnica !== null){
                 infortecnica = await infortecnicaSiccaRepo.index(elem.idInfortecnica, idEmpresa)
                 receita = await receitaRepo.show(infortecnica.idReceita)
-
+                console.log(receita.idCliente)
                 cliente = await ClienteRepo.indexFindBySelectSicca(idEmpresa, receita.idCliente)
                 razaoSocialOrNome = cliente.nome
                 cpfcnpj = cliente.cpfcnpj
                 codibge = cliente.codibge
                 propriedade = await propriedadeRepo.indexSicca(receita.idPropriedade, idEmpresa)
-
              }
 
              codembalagem = await embalagem.query().select('codsicca')
              .where('unidadeembalagem', '=',elem.unidademmbalagem)
              .andWhere('capacidadeembalagem', '=', elem.tipoembalagem).first()
+
 
              dadosAgrot = {
                  registroagrotox: elem.registroagrotox,
@@ -83,6 +82,7 @@ export default class SiccaRepositories {
                 nomepropriedade = propriedade.nomepropriedade
             }
 
+            ultimonumreceita = elem.receita
 
             return { 
                 cnpjEmpresa: cnpjEmpresa,
@@ -100,7 +100,12 @@ export default class SiccaRepositories {
                 ...dadosAgrot
             }
 
+            
         }))
+        console.log(relatorio)
         return relatorio
+
+
     }
 }
+

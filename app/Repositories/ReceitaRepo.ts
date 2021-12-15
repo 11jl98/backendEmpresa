@@ -51,7 +51,7 @@ export default class ReceitaRepositories {
         return receitas
     }
     static async show(idReceita) {
-        const receitas = await Receitas.findOrFail(idReceita)
+        const receitas = await Receitas.query().select().where('id_receita', '=',idReceita).first()
         return receitas
     }
     static async deleteInfoByReceita(idReceita,idEmpresa){

@@ -92,13 +92,14 @@ export default class MovimentaestoqueRepositories {
 
 
         const movimentaestoque = await Movimentaestoque.query()
-            .select(['id_estoque', 'id_fornecedor', 'id_infortecnica','numerocontrole', 'data', 'datanfe','unidademmbalagem', 'tipoembalagem',
-                'id_embalagem','tipomovimentacao', 'notafiscal', 'numlote', 'quantidade', 'receita', 'registroagrotox', 'serie'])
-            .where('id_empresa', '=', idEmpresa)
-            .andWhere('data', '>=', dataInit)
-            .andWhere('data', '<=', dataFinal)
-            
-        return movimentaestoque
+        .select(['id_estoque','id_infortecnica', 'id_fornecedor', 'numerocontrole', 'data', 'datavencimento', 'datanfe', 'embalagemindea',
+            'enviado', 'nomeagrotoxico', 'id_agrotoxico', 'nomeembalagem', 'tipoembalagem', 'unidademmbalagem', 'id_embalagem','nomeresponsaveltecnico',
+            'tipomovimentacao', 'json', 'notafiscal', 'numlote', 'observacao', 'quantidade', 'receita', 'registroagrotox', 'serie', 'statussc',])
+        .where('id_empresa', '=', idEmpresa)
+        .andWhere('data', '>=', dataInit)
+        .andWhere('data', '<=', dataFinal)
+
+    return movimentaestoque
     }
 
 }
