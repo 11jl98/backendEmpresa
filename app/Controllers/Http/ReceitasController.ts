@@ -53,6 +53,16 @@ export default class ReceitasController {
     return receitas
   }
 
+  public async indexByArtResponsavel({ auth, params}: HttpContextContract) {
+    const user = await auth.authenticate()
+    const id = user.id
+    let art = params.art
+    let id_responsavel = params.id
+    
+    const receitas = await ReceitaRepo.indexByArtResponsavel(art, id_responsavel, id)
+    return receitas
+  }
+
   public async store ({request, auth}: HttpContextContract) {
     const user = await auth.authenticate()
     const id = user.id
@@ -75,9 +85,9 @@ export default class ReceitasController {
   public async show ({params}: HttpContextContract) {
     const receitas = await ReceitaRepo.show(params.id)
 
-    await receitas.preload('cliente')
-    await receitas.preload('propriedade')
-    await receitas.preload('responsavel')
+    await receitas?.preload('cliente')
+    await receitas?.preload('propriedade')
+    await receitas?.preload('responsavel')
     return receitas
   }
 

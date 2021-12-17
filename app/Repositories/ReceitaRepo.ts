@@ -60,6 +60,15 @@ export default class ReceitaRepositories {
         .andWhere('id_empresa', '=', idEmpresa)
         return info
     }
+    static async indexByArtResponsavel(art, id_responsavel, idEmpresa) {
+        const receitas = await Receitas.query()        .select()
+        .where('numeroart', '=', art)
+        .andWhere('id_responsavel', '=', id_responsavel)
+        .andWhere('id_empresa', '=', idEmpresa)
+        .count('id_receita as total')
+
+        return receitas
+    }
 }
 
 
