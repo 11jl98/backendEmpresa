@@ -8,7 +8,7 @@ export default class ConfiguracaosController {
     const user = await auth.authenticate()
     const id = user.id
     const config = await Config.query().select(['estoquenegativo', 'id_config','modeloreceita', 'quantidadeprodutoreceita' ]).where('id_empresa','=', id)
-    console.log('aqui',config)
+    
     return config
   }
 

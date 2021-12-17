@@ -14,6 +14,8 @@ import './retorno'
 import './lote'
 import './sicca'
 import './configuração'
+import './mip'
+import './mensagem'
 Route.get('/', async () => {
   return { hello: 'world' }
 })

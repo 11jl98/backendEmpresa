@@ -7,7 +7,7 @@ export default class AvataLogoController {
     const response = await Database.transaction(async(trx)=>{
 
       const user = await (await auth.authenticate()!).useTransaction(trx)
-      console.log(user)
+      
       const userId = await auth.authenticate()
       const id = userId.id
       const file = await request.file('file')
@@ -18,7 +18,7 @@ export default class AvataLogoController {
       }
  
       const avatar = await user.related('avatar').firstOrCreate(queryPayload, savePayload)
-      console.log(file)
+      
       await file?.move(Application.makePath('uploads'),{
         name: avatar.filename,
         overwrite: true
@@ -28,7 +28,7 @@ export default class AvataLogoController {
     return {url: response.url}
   }
   public async show ({params, response}: HttpContextContract) {
-    console.log(params.file)
+    
     return response.download(Application.makePath('uploads',params.file))
   }
 }

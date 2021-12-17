@@ -109,9 +109,9 @@ export default class ReceitasController {
     const id = user.id
     const receitas = await Receitas.findOrFail(params.id)
     const receitasInfo = await ReceitaRepo.deleteInfoByReceita(params.id, id)
-    console.log(receitasInfo)
+    
     if(receitasInfo.length > 0 ){
-      console.log('ta aqui')
+      
       return response.status(409)
     }
     await receitas.delete() 

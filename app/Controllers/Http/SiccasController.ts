@@ -20,7 +20,7 @@ export default class SiccasController {
           line += sicca[i][index] + ';'
         else
           for (var j = 0; j < sicca[i][index].length; j++) {
-            console.log(sicca[i][index].length)
+            
 
             for (var index2 in sicca[i][index][j]) {
 
@@ -34,7 +34,7 @@ export default class SiccasController {
 
       str += line + '\r\n'
 
-      console.log(str)
+      
 
 
     }

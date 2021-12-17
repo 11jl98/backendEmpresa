@@ -23,7 +23,7 @@ class InfortecnicaReceitasController {
         const id = user.id;
         const Uuid = uuid_1.v4();
         const data = await request.validate(InfortecnicaValidator_1.default);
-        console.log(data);
+        
         const info = await Infortecnica_1.default.create({
             ...data,
             idEmpresa: id,
@@ -52,7 +52,7 @@ class InfortecnicaReceitasController {
             nomeresponsaveltecnico: info.receita.nomeresponsavel
         };
         await MovimentaestoqueRepo_1.default.storeMovReceita(movEstoque, id, Uuid);
-        console.log('ta aqui ', info);
+        
         return info;
     }
     async show({ params, auth }) {

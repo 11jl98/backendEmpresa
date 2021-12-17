@@ -8,7 +8,7 @@ export default class InventarioestoquesController {
     const estoque = await Estoque.query().
     where('id_empresa','=', id)
     let count = 1
-    console.log(estoque)
+    
     const est = estoque.reduce((acc, current) => {
       let nomeEmbalagem = current.nomeembalagem + ' ' + current.tipoembalagem + ' '+  current.unidademmbalagem
       acc[current.nomeagrotoxico] = acc[current.nomeagrotoxico] || {}
