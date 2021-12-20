@@ -1,48 +1,39 @@
 import { HttpContextContract } from '@ioc:Adonis/Core/HttpContext'
 import Estoque from 'App/Models/Movimentaestoque'
+import Database from '@ioc:Adonis/Lucid/Database'
 
 export default class InventarioestoquesController {
   public async index({ auth}: HttpContextContract) {
+
     const user = await auth.authenticate()
     const id = user.id
-    const estoque = await Estoque.query().
-    where('id_empresa','=', id)
-    let count = 1
-    console.log(estoque)
-    const est = estoque.reduce((acc, current) => {
-      let nomeEmbalagem = current.nomeembalagem + ' ' + current.tipoembalagem + ' '+  current.unidademmbalagem
-      acc[current.nomeagrotoxico] = acc[current.nomeagrotoxico] || {}
-      acc[current.nomeagrotoxico][nomeEmbalagem] = acc[current.nomeagrotoxico][nomeEmbalagem] ||{}
-      acc[current.nomeagrotoxico][nomeEmbalagem]['quantidade'] = acc[current.nomeagrotoxico][nomeEmbalagem]['quantidade']||0 
-
-      acc[current.nomeagrotoxico][nomeEmbalagem]['quantidade'] += Number(current.quantidade)
-      acc[current.nomeagrotoxico][nomeEmbalagem]['indice'] = count
-      count = count + 1
-      return acc
-    }, {})
-    return est
+    
+    const estoque = await Database.knexRawQuery(`select
+      estoque.nomeagrotoxico, estoque.id_agrotoxico, estoque.nomeembalagem, estoque.tipoembalagem,
+       estoque.unidademmbalagem, SUM(estoque.quantidade) as total from movimentaestoques as estoque,
+        lotes as lote  where estoque.id_agrotoxico = lote.id_agrotoxico
+         and estoque.nomeembalagem = lote.embalagem and estoque.tipoembalagem = lote.capacidadeembalagem
+          and estoque.unidademmbalagem = lote.unidadeembalagem GROUP BY id_agrotoxico, estoque.nomeembalagem, 
+          estoque.tipoembalagem, estoque.unidademmbalagem` )
+  
+    console.log(estoque[0])
+    return estoque[0]
   }
   public async indexLote({ auth}: HttpContextContract) {
     const user = await auth.authenticate()
     const id = user.id
-    const estoque = await Estoque.query().
-    where('id_empresa','=', id)
-    let count = 1
     
-    const est = estoque.reduce((acc, current) => {
-      let nomeEmbalagem = current.nomeembalagem + ' ' + current.tipoembalagem + ' '+  current.unidademmbalagem
-      acc[current.nomeagrotoxico] = acc[current.nomeagrotoxico] || {}
-      acc[current.nomeagrotoxico][nomeEmbalagem] = acc[current.nomeagrotoxico][nomeEmbalagem] ||{}
-      if(current.numlote === null)current.numlote = "Sem lote"
-      acc[current.nomeagrotoxico][nomeEmbalagem][current.numlote] = acc[current.nomeagrotoxico][current.numlote] ||{}
-      acc[current.nomeagrotoxico][nomeEmbalagem][current.numlote]['quantidade'] = acc[current.nomeagrotoxico][nomeEmbalagem][current.numlote]['quantidade']||0 
+    const estoque = await Database.knexRawQuery(`select estoque.numlote,
+      estoque.nomeagrotoxico, estoque.id_agrotoxico, estoque.nomeembalagem, estoque.tipoembalagem,
+       estoque.unidademmbalagem, SUM(estoque.quantidade) as total from movimentaestoques as estoque,
+        lotes as lote  where estoque.numlote = lote.numlote and estoque.id_agrotoxico = lote.id_agrotoxico
+         and estoque.nomeembalagem = lote.embalagem and estoque.tipoembalagem = lote.capacidadeembalagem
+          and estoque.unidademmbalagem = lote.unidadeembalagem GROUP BY numlote, estoque.nomeembalagem, 
+          estoque.tipoembalagem, estoque.unidademmbalagem` )
+  
+    console.log(estoque[0])
+    return estoque[0]
 
-      acc[current.nomeagrotoxico][nomeEmbalagem][current.numlote]['quantidade'] += Number(current.quantidade)
-      acc[current.nomeagrotoxico][nomeEmbalagem][current.numlote]['indice'] = count
-      count = count + 1
-      return acc
-    }, {})
-    return est
   }
   public async show({ }: HttpContextContract) {
     const estoque = await Estoque.all()
