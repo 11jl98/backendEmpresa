@@ -6,7 +6,7 @@ export default class Mips extends BaseSchema {
 
   public async up () {
     this.schema.createTable(this.tableName, (table) => {
-      table.increments('id_mip').primary()
+      table.string('id_mip').primary()
       table.uuid('id_empresa').references('id').inTable('users').onUpdate('CASCADE')
       table.string('titulo', 50)
       table.text('observacao', 'longtext')
