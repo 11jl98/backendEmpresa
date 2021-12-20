@@ -4,7 +4,16 @@ import MensagemValidator from '../../Validators/MensagemValidator'
 import { v4 as uuid } from 'uuid'
 
 export default class MensagensController {
-  public async index({ }: HttpContextContract) {
+  public async index({ auth }: HttpContextContract) {
+    const user = await auth.authenticate()
+    const id = user.id;
+
+    const mensagem = await Mensagem
+    .query()
+    .select()
+    .where("id_empresa", "=", id)
+
+    return mensagem
   }
 
   public async create({ }: HttpContextContract) {

@@ -4,7 +4,7 @@ import User from 'App/Models/User'
 
 export default class Mip extends BaseModel {
   @column({ isPrimary: true })
-  public id_mensagem: string
+  public id_mip: string
 
   @column()
   public idEmpresa: string
