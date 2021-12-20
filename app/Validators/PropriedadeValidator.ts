@@ -16,13 +16,22 @@ class PropriedadeValidatorStore {
 		cidade: schema.string({trim: true}),
 		uf: schema.string({trim: true}),
 		cep: schema.string({trim: true}),
-		latitude: schema.string({trim: true}),
-		longitude: schema.string({trim: true}),
-		codibge:schema.string({trim: true})
+		latitude: schema.string.optional({trim: true}),
+		longitude: schema.string.optional({trim: true}),
+		codibge:schema.string.optional({trim: true})
 
 	})
 
-	public messages = {}
+	public messages = {
+	'id_cliente.required':'É necessário um cliente selecionado',
+	'nomepropriedade.required':'Nome da propriedade não pode ficar em branco',
+	'endereco.required':'Endereço não pode ficar em branco',
+	'bairro.required':'Bairro não pode ficar em branco',
+	'numero.required':'Numero não pode ficar em branco',
+	'cidade.required':'Cidade não pode ficar em branco',
+	'uf.required':'UF não pode ficar em branco',
+	'cep.required':'CEP não pode ficar em branco',
+	}
 }
 class PropriedadeValidatorUpdate {
 	constructor(protected ctx: HttpContextContract) {
@@ -46,7 +55,16 @@ class PropriedadeValidatorUpdate {
 
 	})
 
-	public messages = {}
+	public messages = {
+		'id_cliente.required':'É necessário um cliente selecionado',
+		'nomepropriedade.required':'Nome da propriedade não pode ficar em branco',
+		'endereco.required':'Endereço não pode ficar em branco',
+		'bairro.required':'Bairro não pode ficar em branco',
+		'numero.required':'Numero não pode ficar em branco',
+		'cidade.required':'Cidade não pode ficar em branco',
+		'uf.required':'UF não pode ficar em branco',
+		'cep.required':'CEP não pode ficar em branco',
+	}
 }
 
 export default {PropriedadeValidatorStore, PropriedadeValidatorUpdate}

@@ -15,15 +15,25 @@ class ClienteValidatorStore {
 		uf: schema.string({ trim: true }),
 		cep: schema.string({ trim: true }),
 		telefone: schema.string({ trim: true }, [rules.maxLength(15)]),
-		email: schema.string({ trim: true }, [rules.email()]),
-		iepr: schema.string({ trim: true }),
+		email: schema.string.optional({ trim: true }, [rules.email()]),
+		iepr: schema.string.optional({ trim: true }),
 		observacao: schema.string.optional({ trim: true }),
-		rgie: schema.string({ trim: true }),
+		rgie: schema.string.optional({ trim: true }),
 		status: schema.string.optional({ trim: true }),
-		codibge: schema.string({ trim: true })
+		codibge: schema.string.optional({ trim: true })
 
 	})
-	public messages = {}
+	public messages = {
+	'nome.required':'Nome não pode ficar em branco',
+	'cpfcnpj.required':'CPF/CNPJ não pode ficar em branco',
+	'endereco.required':'Endereço não pode ficar em branco',
+	'bairro.required':'Bairro não pode ficar em branco',
+	'numero.required':'Número não pode ficar em branco',
+	'cidade.required':'Cidade não pode ficar em branco',
+	'telefone.required':'Telefone não pode ficar em branco',
+	'uf.required':'UF não pode ficar em branco',
+	'cep.required':'CEP não pode ficar em branco',
+	}
 }
 class ClienteValidatorUpdate {
 	constructor(protected ctx: HttpContextContract) {
@@ -48,7 +58,15 @@ class ClienteValidatorUpdate {
 
 	})
 
-	public messages = {}
+	public messages = {
+		'nome.required':'Nome não pode ficar em branco',
+		'nome.cpfcnpj':'CPF/CNPJ não pode ficar em branco',
+		'endereco.required':'Endereço não pode ficar em branco',
+		'bairro.required':'Bairro não pode ficar em branco',
+		'numero.required':'Número não pode ficar em branco',
+		'cidade.required':'Cidade não pode ficar em branco',
+		'telefone.required':'Telefone não pode ficar em branco',
+		}
 }
 
 export default { ClienteValidatorStore, ClienteValidatorUpdate }
