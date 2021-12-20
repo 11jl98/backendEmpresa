@@ -16,7 +16,18 @@ export default class MensagensController {
     return mensagem
   }
 
-  public async create({ }: HttpContextContract) {
+  public async paginateMensagens({ params, auth }: HttpContextContract) {
+    const user = await auth.authenticate()
+    const id = user.id;
+
+    const mensagem = await Mensagem
+    .query()
+    .select('id_mensagem', 'titulo', 'observacao')
+    .where('id_empresa', '=', id)
+    .paginate(params.page, 5)
+
+    return mensagem
+
   }
 
   public async store({ request, auth }: HttpContextContract) {

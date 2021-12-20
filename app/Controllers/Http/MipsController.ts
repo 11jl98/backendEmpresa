@@ -17,7 +17,17 @@ export default class MipsController {
     
   }
 
-  public async create ({}: HttpContextContract) {
+  public async paginateMips ({params, auth}: HttpContextContract) {
+    const user = await auth.authenticate();
+    const id = user.id;
+
+    const mip = await Mips
+    .query()
+    .select('id_mip', 'titulo', 'observacao')
+    .where("id_empresa", "=", id)
+    .paginate(params.page, 5)
+
+    return mip
   }
 
   public async store ({request, auth}: HttpContextContract) {
