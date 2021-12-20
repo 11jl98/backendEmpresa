@@ -14,7 +14,7 @@ export default class LotesController {
     let capacidadeembalagem = params.capacidadeembalagem
 
     embalagem = decodeURIComponent(embalagem)
-    console.log(embalagem, "auiosi")
+    
 
     const lotes = await LoteRepo.index(id_agrotoxico, embalagem, capacidadeembalagem, unidademmbalagem, id)
     
@@ -30,7 +30,7 @@ export default class LotesController {
     let numlote = params.numlote
 
     embalagem = decodeURIComponent(embalagem)
-    console.log(embalagem, "auiosi")
+    
 
     const lotes = await LoteRepo.indexNum(id_agrotoxico, embalagem, capacidadeembalagem, unidademmbalagem,numlote, id)
     

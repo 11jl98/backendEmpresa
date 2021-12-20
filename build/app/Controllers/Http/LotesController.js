@@ -16,7 +16,7 @@ class LotesController {
         let unidademmbalagem = params.unidademmbalagem;
         let capacidadeembalagem = params.capacidadeembalagem;
         embalagem = decodeURIComponent(embalagem);
-        console.log(embalagem, "auiosi");
+        
         const lotes = await LoteRepo_1.default.index(id_agrotoxico, embalagem, capacidadeembalagem, unidademmbalagem, id);
         return lotes;
     }

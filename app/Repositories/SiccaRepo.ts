@@ -97,7 +97,7 @@ export default class SiccaRepositories {
                     codembalagem = await embalagem.query().select('codsicca')
                     .where('unidadeembalagem', '=',infortecnica[i].unidademmbalagem)
                     .andWhere('capacidadeembalagem', '=', infortecnica[i].tipoembalagem).first()
-                    console.log(codembalagem)
+                    
                     dadosAgrot = {
                         registroagrotox: infortecnica[i].registroagrotoxico,
                         quantidade: infortecnica[i].quantembal,

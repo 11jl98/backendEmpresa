@@ -26,7 +26,7 @@ export default class InfortecnicaReceitasController {
     const Uuid = uuid()
 
     const data = await request.validate(InfortecnicaValidator)
-    console.log(data)
+    
     const info = await Infortecnica.create({
       ...data,
       idEmpresa: id,
@@ -55,7 +55,7 @@ export default class InfortecnicaReceitasController {
       nomeresponsaveltecnico: info.receita.nomeresponsavel
     }
     await MovimentaestoqueRepo.storeMovReceita(movEstoque, id, Uuid)
-    console.log('ta aqui ',info)
+    
     return info
   }
 
