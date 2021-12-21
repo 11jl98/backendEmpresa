@@ -33,6 +33,8 @@ class ClienteValidatorStore {
 	'telefone.required':'Telefone não pode ficar em branco',
 	'uf.required':'UF não pode ficar em branco',
 	'cep.required':'CEP não pode ficar em branco',
+	'cpfcnpj.unique':'CPF/CNPJ já cadastrado',
+
 	}
 }
 class ClienteValidatorUpdate {

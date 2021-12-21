@@ -44,6 +44,7 @@ export default class PropriedadesController {
   public async update ({ request, params }: HttpContextContract) {
     const propriedade = await Propriedade.findOrFail(params.id)
     const data = await request.validate(PropriedadeValidator.PropriedadeValidatorUpdate)
+    console.log(data)
 
     propriedade.merge(data)
     await propriedade.save()

@@ -40,18 +40,18 @@ class PropriedadeValidatorUpdate {
 	public schema = schema.create({
 		id_cliente: schema.string({}),
 		nomepropriedade: schema.string({trim: true}),
-		cpfcnpj:schema.string({trim: true},[rules.minLength(14), rules.maxLength(18)]),
-		iepr: schema.string({trim: true}),
-		rgie:schema.string({trim: true}),
+		cpfcnpj:schema.string.optional({trim: true},[rules.minLength(14), rules.maxLength(18)]),
+		iepr: schema.string.optional({trim: true}),
+		rgie:schema.string.optional({trim: true}),
 		endereco: schema.string({trim: true}),
 		bairro: schema.string({trim: true}),
 		numero: schema.string({trim: true}),
 		cidade: schema.string({trim: true}),
 		uf: schema.string({trim: true}),
 		cep: schema.string({trim: true}),
-		latitude: schema.string({trim: true}),
-		longitude: schema.string({trim: true}),
-		codibge:schema.string({trim: true})
+		latitude: schema.string.optional({trim: true}),
+		longitude: schema.string.optional({trim: true}),
+		codibge:schema.string.optional({trim: true})
 
 	})
 
