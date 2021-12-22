@@ -16,8 +16,19 @@ class LotesController {
         let unidademmbalagem = params.unidademmbalagem;
         let capacidadeembalagem = params.capacidadeembalagem;
         embalagem = decodeURIComponent(embalagem);
-        
         const lotes = await LoteRepo_1.default.index(id_agrotoxico, embalagem, capacidadeembalagem, unidademmbalagem, id);
+        return lotes;
+    }
+    async indexNum({ params, auth }) {
+        const user = await auth.authenticate();
+        const id = user.id;
+        const id_agrotoxico = params.idAgrotoxico;
+        let embalagem = params.embalagem;
+        let unidademmbalagem = params.unidademmbalagem;
+        let capacidadeembalagem = params.capacidadeembalagem;
+        let numlote = params.numlote;
+        embalagem = decodeURIComponent(embalagem);
+        const lotes = await LoteRepo_1.default.indexNum(id_agrotoxico, embalagem, capacidadeembalagem, unidademmbalagem, numlote, id);
         return lotes;
     }
     async store({ request, auth }) {

@@ -12,7 +12,7 @@ class ResponsavelRepositories {
         const responsavel = await ResponsavelTecnico_1.default.query()
             .select(['id_responsavel', 'nome', 'cpf', 'crea', 'endereco', 'bairro', 'numero', 'cidade', 'uf',
             'cep', 'telefone', 'email', 'receitasart', 'proximareceita', 'artatual',
-            'observacao', 'profissao', 'tokensc', 'complementoreceita', 'seriesc', 'conselho', 'contrato'])
+            'observacao', 'profissao', 'tokensc', 'complementoreceita', 'seriesc', 'conselho', 'contrato', 'codibge'])
             .where('id_empresa', '=', idEmpresa)
             .andWhere(filtro, 'like', `%${texto}%`)
             .orderBy(filtro, 'asc')
@@ -23,7 +23,7 @@ class ResponsavelRepositories {
         const responsavel = await ResponsavelTecnico_1.default.query()
             .select(['id_responsavel', 'nome', 'cpf', 'crea', 'endereco', 'bairro', 'numero', 'cidade', 'uf',
             'cep', 'telefone', 'email', 'receitasart', 'proximareceita', 'artatual',
-            'observacao', 'profissao', 'tokensc', 'complementoreceita', 'seriesc', 'conselho', 'contrato'])
+            'observacao', 'profissao', 'tokensc', 'complementoreceita', 'seriesc', 'conselho', 'contrato', 'codibge'])
             .where('id_empresa', '=', idEmpresa)
             .paginate(page, 5);
         return responsavel;

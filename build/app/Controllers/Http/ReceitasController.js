@@ -47,6 +47,14 @@ class ReceitasController {
         const receitas = await ReceitaRepo_1.default.indexParamsDate(texto, filtro, dataInit, dataFinal, page, id);
         return receitas;
     }
+    async indexByArtResponsavel({ auth, params }) {
+        const user = await auth.authenticate();
+        const id = user.id;
+        let art = params.art;
+        let id_responsavel = params.id;
+        const receitas = await ReceitaRepo_1.default.indexByArtResponsavel(art, id_responsavel, id);
+        return receitas;
+    }
     async store({ request, auth }) {
         const user = await auth.authenticate();
         const id = user.id;
@@ -67,9 +75,9 @@ class ReceitasController {
     }
     async show({ params }) {
         const receitas = await ReceitaRepo_1.default.show(params.id);
-        await receitas.preload('cliente');
-        await receitas.preload('propriedade');
-        await receitas.preload('responsavel');
+        await receitas?.preload('cliente');
+        await receitas?.preload('propriedade');
+        await receitas?.preload('responsavel');
         return receitas;
     }
     async update({ params, request }) {
@@ -87,9 +95,7 @@ class ReceitasController {
         const id = user.id;
         const receitas = await Receita_1.default.findOrFail(params.id);
         const receitasInfo = await ReceitaRepo_1.default.deleteInfoByReceita(params.id, id);
-        
         if (receitasInfo.length > 0) {
-            
             return response.status(409);
         }
         await receitas.delete();

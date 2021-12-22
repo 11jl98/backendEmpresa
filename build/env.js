@@ -8,6 +8,7 @@ exports.default = Env_1.default.rules({
     HOST: Env_1.default.schema.string({ format: 'host' }),
     PORT: Env_1.default.schema.number(),
     APP_KEY: Env_1.default.schema.string(),
+    APP_URL: Env_1.default.schema.string(),
     APP_NAME: Env_1.default.schema.string(),
     NODE_ENV: Env_1.default.schema.enum(['development', 'production', 'testing']),
     DB_CONNECTION: Env_1.default.schema.string(),

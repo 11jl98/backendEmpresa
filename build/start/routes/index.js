@@ -17,6 +17,10 @@ require("./inventario");
 require("./empresa");
 require("./retorno");
 require("./lote");
+require("./sicca");
+require("./configura\u00E7\u00E3o");
+require("./mip");
+require("./mensagem");
 Route_1.default.get('/', async () => {
     return { hello: 'world' };
 });

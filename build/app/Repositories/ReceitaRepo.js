@@ -49,7 +49,7 @@ class ReceitaRepositories {
         return receitas;
     }
     static async show(idReceita) {
-        const receitas = await Receita_1.default.findOrFail(idReceita);
+        const receitas = await Receita_1.default.query().select().where('id_receita', '=', idReceita).first();
         return receitas;
     }
     static async deleteInfoByReceita(idReceita, idEmpresa) {
@@ -57,6 +57,14 @@ class ReceitaRepositories {
             .where('id_receita', '=', idReceita)
             .andWhere('id_empresa', '=', idEmpresa);
         return info;
+    }
+    static async indexByArtResponsavel(art, id_responsavel, idEmpresa) {
+        const receitas = await Receita_1.default.query().select()
+            .where('numeroart', '=', art)
+            .andWhere('id_responsavel', '=', id_responsavel)
+            .andWhere('id_empresa', '=', idEmpresa)
+            .count('id_receita as total');
+        return receitas;
     }
 }
 exports.default = ReceitaRepositories;

@@ -27,6 +27,7 @@ class Empresas extends Schema_1.default {
             table.string('email', 100);
             table.string('ie', 20);
             table.string('avatar_logo');
+            table.string('codibge');
             table.timestamps(true);
         });
     }

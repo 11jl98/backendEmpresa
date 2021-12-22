@@ -4,7 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const Movimentaestoque_1 = __importDefault(global[Symbol.for('ioc.use')]("App/Models/Movimentaestoque"));
-class PropriedadesRepositories {
+class MovimentaestoqueRepositories {
     static async storeMovReceita(data, idEmpresa, uuid) {
         const movimentaestoque = await Movimentaestoque_1.default.create({
             ...data,
@@ -70,6 +70,16 @@ class PropriedadesRepositories {
             .paginate(page, 5);
         return movimentaestoque[0];
     }
+    static async indexByDateSicca(dataInit, dataFinal, idEmpresa) {
+        const movimentaestoque = await Movimentaestoque_1.default.query()
+            .select(['id_estoque', 'id_infortecnica', 'id_fornecedor', 'numerocontrole', 'data', 'datavencimento', 'datanfe', 'embalagemindea',
+            'enviado', 'nomeagrotoxico', 'id_agrotoxico', 'nomeembalagem', 'tipoembalagem', 'unidademmbalagem', 'id_embalagem', 'nomeresponsaveltecnico',
+            'tipomovimentacao', 'json', 'notafiscal', 'numlote', 'observacao', 'quantidade', 'receita', 'registroagrotox', 'serie', 'statussc',])
+            .where('id_empresa', '=', idEmpresa)
+            .andWhere('data', '>=', dataInit)
+            .andWhere('data', '<=', dataFinal);
+        return movimentaestoque;
+    }
 }
-exports.default = PropriedadesRepositories;
+exports.default = MovimentaestoqueRepositories;
 //# sourceMappingURL=MovimentaestoqueRepo.js.map

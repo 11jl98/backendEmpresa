@@ -14,6 +14,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const luxon_1 = require("luxon");
 const Hash_1 = __importDefault(global[Symbol.for('ioc.use')]("Adonis/Core/Hash"));
+const AvatarLogo_1 = __importDefault(global[Symbol.for('ioc.use')]("App/Models/AvatarLogo"));
 const Orm_1 = global[Symbol.for('ioc.use')]("Adonis/Lucid/Orm");
 class User extends Orm_1.BaseModel {
     static async hashPassword(user) {
@@ -50,6 +51,12 @@ __decorate([
     Orm_1.column.dateTime({ autoCreate: true, autoUpdate: true }),
     __metadata("design:type", luxon_1.DateTime)
 ], User.prototype, "updatedAt", void 0);
+__decorate([
+    Orm_1.hasOne(() => AvatarLogo_1.default, {
+        foreignKey: 'idEmpresa'
+    }),
+    __metadata("design:type", Object)
+], User.prototype, "avatar", void 0);
 __decorate([
     Orm_1.beforeSave(),
     __metadata("design:type", Function),
