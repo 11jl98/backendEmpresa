@@ -3,7 +3,33 @@ import Estoque from 'App/Models/Movimentaestoque'
 import Database from '@ioc:Adonis/Lucid/Database'
 
 export default class InventarioestoquesController {
-  public async index({ params, auth}: HttpContextContract) {
+  public async indexBuscarDadosEstoquePorData({ params, auth}: HttpContextContract) {
+    const user = await auth.authenticate()
+    const id = user.id  
+
+    const filtro = params.filtro
+    const dataInicial = params.dataInicial
+    const dataFinal = params.dataFinal
+    let texto = params.texto
+
+    texto = decodeURIComponent(texto)
+
+    const dadosPesquisa = await Estoque
+    .query()
+    .select('numlote', 'nomeagrotoxico', 'id_agrotoxico', 'nomeembalagem', 'tipoembalagem', 'unidademmbalagem', 'datavencimento', 'data')
+    .sum('quantidade as total')
+    .where('id_empresa', '=', id)
+    .andWhere(filtro, 'like', `%${texto}%`)
+    .andWhere('data', ">=", dataInicial)
+    .andWhere('data', "<=", dataFinal)
+    .groupBy('numlote', 'nomeembalagem', 'tipoembalagem', 'unidademmbalagem')
+    .orderBy('nomeagrotoxico')
+    console.log(dadosPesquisa)
+        return dadosPesquisa
+
+  }
+
+  public async indexBuscarDadosEstoque({ params, auth}: HttpContextContract) {
     const user = await auth.authenticate()
     const id = user.id  
 
@@ -14,15 +40,17 @@ export default class InventarioestoquesController {
 
     const dadosPesquisa = await Estoque
     .query()
-    .select('numlote', 'nomeagrotoxico', 'id_agrotoxico', 'nomeembalagem', 'tipoembalagem', 'unidademmbalagem', 'datavencimento')
+    .select('numlote', 'nomeagrotoxico', 'id_agrotoxico', 'nomeembalagem', 'tipoembalagem', 'unidademmbalagem', 'datavencimento', 'data')
     .sum('quantidade as total')
     .where('id_empresa', '=', id)
     .andWhere(filtro, 'like', `%${texto}%`)
     .groupBy('numlote', 'nomeembalagem', 'tipoembalagem', 'unidademmbalagem')
     .orderBy('nomeagrotoxico')
+    console.log(dadosPesquisa)
         return dadosPesquisa
 
   }
+
   public async indexLote({ auth}: HttpContextContract) {
     const user = await auth.authenticate()
     const id = user.id
