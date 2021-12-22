@@ -4,7 +4,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const Lote_1 = __importDefault(global[Symbol.for('ioc.use')]("App/Models/Lote"));
-class PropriedadesRepositories {
+class LoteRepositories {
     constructor(ctx) {
         this.ctx = ctx;
     }
@@ -18,6 +18,17 @@ class PropriedadesRepositories {
             .andWhere('unidadeembalagem', '=', unidadeEmbalagem.trim());
         return lotes;
     }
+    static async indexNum(idAgrotoxico, embalagem, capacidadeEmbalagem, unidadeEmbalagem, numlote, idEmpresa) {
+        const lotes = await Lote_1.default.query()
+            .select(['id_lote', 'numlote', 'datavencimento'])
+            .where('id_empresa', '=', idEmpresa)
+            .where('id_agrotoxico', '=', idAgrotoxico)
+            .andWhere('embalagem', '=', embalagem.trim())
+            .andWhere('capacidadeembalagem', '=', capacidadeEmbalagem.trim())
+            .andWhere('unidadeembalagem', '=', unidadeEmbalagem.trim())
+            .andWhere('numlote', '=', numlote.trim());
+        return lotes;
+    }
 }
-exports.default = PropriedadesRepositories;
+exports.default = LoteRepositories;
 //# sourceMappingURL=LoteRepo.js.map

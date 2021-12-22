@@ -24,6 +24,12 @@ class FornecedorRepositories {
             .paginate(page, 5);
         return fornecedor;
     }
+    static async indexFindBySelectSicca(idEmpresa, idFornecedor) {
+        const fornecedor = await Fornecedor_1.default.query().select(['nome', 'cpfcnpj', 'endereco', 'bairro', 'numero', 'codibge'])
+            .where('id_empresa', '=', idEmpresa)
+            .andWhere('id_fornecedor', '=', idFornecedor).first();
+        return fornecedor;
+    }
 }
 exports.default = FornecedorRepositories;
 //# sourceMappingURL=FornecedorRepo.js.map

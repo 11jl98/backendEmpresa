@@ -7,16 +7,18 @@ class EmpresaValidatorStore {
         this.schema = Validator_1.schema.create({
             nomeempresa: Validator_1.schema.string({ trim: true }),
             nomefantasia: Validator_1.schema.string({ trim: true }),
-            cpfcnpj: Validator_1.schema.string({ trim: true }, [Validator_1.rules.minLength(11), Validator_1.rules.maxLength(25), Validator_1.rules.unique({ table: 'empresas', column: 'cpfcnpj' })]),
+            cpfcnpj: Validator_1.schema.string({ trim: true }, [Validator_1.rules.minLength(14), Validator_1.rules.maxLength(18), Validator_1.rules.unique({ table: 'empresas', column: 'cpfcnpj' })]),
             endereco: Validator_1.schema.string({ trim: true }),
             bairro: Validator_1.schema.string({ trim: true }),
             numero: Validator_1.schema.string({ trim: true }),
             cidade: Validator_1.schema.string({ trim: true }),
             UF: Validator_1.schema.string({ trim: true }),
             cep: Validator_1.schema.string({ trim: true }),
-            telefone: Validator_1.schema.string({ trim: true }, [Validator_1.rules.maxLength(11)]),
+            telefone: Validator_1.schema.string({ trim: true }, [Validator_1.rules.maxLength(15)]),
             email: Validator_1.schema.string({ trim: true }, [Validator_1.rules.email()]),
             ie: Validator_1.schema.string({ trim: true }),
+            codibge: Validator_1.schema.string({ trim: true }),
+            avatar_logo: Validator_1.schema.string.optional({ trim: true }),
         });
         this.messages = {
             'nomeempresa.required': 'Razão social não pode ficar em branco',
@@ -40,16 +42,18 @@ class EmpresaValidatorUpdate {
         this.schema = Validator_1.schema.create({
             nomeempresa: Validator_1.schema.string({ trim: true }),
             nomefantasia: Validator_1.schema.string({ trim: true }),
-            cpfcnpj: Validator_1.schema.string({ trim: true }),
+            cpfcnpj: Validator_1.schema.string({ trim: true }, [Validator_1.rules.minLength(14), Validator_1.rules.maxLength(18)]),
             endereco: Validator_1.schema.string({ trim: true }),
             bairro: Validator_1.schema.string({ trim: true }),
             numero: Validator_1.schema.string({ trim: true }),
             cidade: Validator_1.schema.string({ trim: true }),
             UF: Validator_1.schema.string({ trim: true }),
             cep: Validator_1.schema.string({ trim: true }),
-            telefone: Validator_1.schema.string({ trim: true }, [Validator_1.rules.maxLength(11)]),
+            telefone: Validator_1.schema.string({ trim: true }, [Validator_1.rules.maxLength(15)]),
             email: Validator_1.schema.string({ trim: true }, [Validator_1.rules.email()]),
             ie: Validator_1.schema.string({ trim: true }),
+            codibge: Validator_1.schema.string({ trim: true }),
+            avatar_logo: Validator_1.schema.string.optional({ trim: true }),
         });
         this.messages = {
             'nomeempresa.required': 'Razão social não pode ficar em branco',

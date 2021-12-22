@@ -22,7 +22,6 @@ class AuthController {
         catch (error) {
             return error;
         }
-        
         const token = auth.attempt(data.login, data.password, {
             expiresIn: '30 days',
         });

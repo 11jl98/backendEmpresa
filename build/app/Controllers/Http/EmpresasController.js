@@ -10,8 +10,7 @@ class EmpresasController {
     async index({ auth }) {
         const user = await auth.authenticate();
         const id = user.id;
-        const empresa = await Empresa_1.default.query().select('nomeempresa', 'nomefantasia', 'cpfcnpj', 'endereco', 'bairro', 'numero', 'cidade', 'uf', 'cep', 'telefone', 'email', 'ie', 'avatar_logo').where('id_empresa', '=', id);
-        
+        const empresa = await Empresa_1.default.query().select('id_cadastro', 'nomeempresa', 'nomefantasia', 'cpfcnpj', 'endereco', 'bairro', 'numero', 'cidade', 'uf', 'codibge', 'cep', 'telefone', 'email', 'ie', 'avatar_logo').where('id_empresa', '=', id);
         return empresa;
     }
     async store({ request, auth }) {

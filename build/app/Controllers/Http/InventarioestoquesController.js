@@ -4,21 +4,35 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const Movimentaestoque_1 = __importDefault(global[Symbol.for('ioc.use')]("App/Models/Movimentaestoque"));
+const Database_1 = __importDefault(global[Symbol.for('ioc.use')]("Adonis/Lucid/Database"));
 class InventarioestoquesController {
-    async index({ auth }) {
+    async index({ params, auth }) {
         const user = await auth.authenticate();
         const id = user.id;
-        const estoque = await Movimentaestoque_1.default.query().
-            where('id_empresa', '=', id);
-        const est = estoque.reduce((acc, current) => {
-            let nomeEmbalagem = current.nomeembalagem + '-' + current.tipoembalagem + '-' + current.unidademmbalagem;
-            acc[current.nomeagrotoxico] = acc[current.nomeagrotoxico] || {};
-            acc[current.nomeagrotoxico][nomeEmbalagem] = acc[current.nomeagrotoxico][nomeEmbalagem] || {};
-            acc[current.nomeagrotoxico][nomeEmbalagem]['quantidade'] = acc[current.nomeagrotoxico][nomeEmbalagem]['quantidade'] || 0;
-            acc[current.nomeagrotoxico][nomeEmbalagem]['quantidade'] += Number(current.quantidade);
-            return acc;
-        }, {});
-        return est;
+        const filtro = params.filtro;
+        let texto = params.texto;
+        texto = decodeURIComponent(texto);
+        const dadosPesquisa = await Movimentaestoque_1.default
+            .query()
+            .select('numlote', 'nomeagrotoxico', 'id_agrotoxico', 'nomeembalagem', 'tipoembalagem', 'unidademmbalagem', 'datavencimento')
+            .sum('quantidade as total')
+            .where('id_empresa', '=', id)
+            .andWhere(filtro, 'like', `%${texto}%`)
+            .groupBy('numlote', 'nomeembalagem', 'tipoembalagem', 'unidademmbalagem')
+            .orderBy('nomeagrotoxico');
+        return dadosPesquisa;
+    }
+    async indexLote({ auth }) {
+        const user = await auth.authenticate();
+        const id = user.id;
+        const estoque = await Database_1.default.knexRawQuery(`select estoque.numlote, estoque.datavencimento,
+    estoque.nomeagrotoxico, estoque.id_agrotoxico, estoque.nomeembalagem, estoque.tipoembalagem,
+     estoque.unidademmbalagem, SUM(estoque.quantidade) as total from movimentaestoques as estoque,
+      lotes as lote  where estoque.id_empresa = '${id}' and estoque.numlote = lote.numlote and estoque.id_agrotoxico = lote.id_agrotoxico
+       and estoque.nomeembalagem = lote.embalagem and estoque.tipoembalagem = lote.capacidadeembalagem
+        and estoque.unidademmbalagem = lote.unidadeembalagem GROUP BY numlote, estoque.nomeembalagem, estoque.tipoembalagem, estoque.unidademmbalagem`);
+        console.log(estoque[0]);
+        return estoque[0];
     }
     async show({}) {
         const estoque = await Movimentaestoque_1.default.all();

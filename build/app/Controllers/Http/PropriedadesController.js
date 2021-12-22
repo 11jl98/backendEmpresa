@@ -41,6 +41,7 @@ class PropriedadesController {
     async update({ request, params }) {
         const propriedade = await Propriedade_1.default.findOrFail(params.id);
         const data = await request.validate(PropriedadeValidator_1.default.PropriedadeValidatorUpdate);
+        console.log(data);
         propriedade.merge(data);
         await propriedade.save();
         return propriedade;
