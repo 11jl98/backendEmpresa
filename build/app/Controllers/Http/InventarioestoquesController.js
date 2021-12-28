@@ -6,7 +6,28 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const Movimentaestoque_1 = __importDefault(global[Symbol.for('ioc.use')]("App/Models/Movimentaestoque"));
 const Database_1 = __importDefault(global[Symbol.for('ioc.use')]("Adonis/Lucid/Database"));
 class InventarioestoquesController {
-    async index({ params, auth }) {
+    async indexBuscarDadosEstoquePorData({ params, auth }) {
+        const user = await auth.authenticate();
+        const id = user.id;
+        const filtro = params.filtro;
+        const dataInicial = params.dataInicial;
+        const dataFinal = params.dataFinal;
+        let texto = params.texto;
+        texto = decodeURIComponent(texto);
+        const dadosPesquisa = await Movimentaestoque_1.default
+            .query()
+            .select('numlote', 'nomeagrotoxico', 'id_agrotoxico', 'nomeembalagem', 'tipoembalagem', 'unidademmbalagem', 'datavencimento', 'data')
+            .sum('quantidade as total')
+            .where('id_empresa', '=', id)
+            .andWhere(filtro, 'like', `%${texto}%`)
+            .andWhere('data', ">=", dataInicial)
+            .andWhere('data', "<=", dataFinal)
+            .groupBy('numlote', 'nomeembalagem', 'tipoembalagem', 'unidademmbalagem')
+            .orderBy('nomeagrotoxico');
+        console.log(dadosPesquisa);
+        return dadosPesquisa;
+    }
+    async indexBuscarDadosEstoque({ params, auth }) {
         const user = await auth.authenticate();
         const id = user.id;
         const filtro = params.filtro;
@@ -14,12 +35,13 @@ class InventarioestoquesController {
         texto = decodeURIComponent(texto);
         const dadosPesquisa = await Movimentaestoque_1.default
             .query()
-            .select('numlote', 'nomeagrotoxico', 'id_agrotoxico', 'nomeembalagem', 'tipoembalagem', 'unidademmbalagem', 'datavencimento')
+            .select('numlote', 'nomeagrotoxico', 'id_agrotoxico', 'nomeembalagem', 'tipoembalagem', 'unidademmbalagem', 'datavencimento', 'data')
             .sum('quantidade as total')
             .where('id_empresa', '=', id)
             .andWhere(filtro, 'like', `%${texto}%`)
             .groupBy('numlote', 'nomeembalagem', 'tipoembalagem', 'unidademmbalagem')
             .orderBy('nomeagrotoxico');
+        console.log(dadosPesquisa);
         return dadosPesquisa;
     }
     async indexLote({ auth }) {
