@@ -33,8 +33,7 @@ export default class ClientesController {
   public async indexFindByCliente ({ auth }: HttpContextContract) {
     const user = await auth.authenticate()
     const id = user.id
-    const cliente = await Cliente.query().select(['id_cliente', 'nome'])
-     .where('id_empresa', '=', id )
+    const cliente = await ClienteRepo.indexFindByCliente(id)
     return cliente
     
   }
@@ -57,22 +56,17 @@ export default class ClientesController {
   }
 
   public async show ({ params }: HttpContextContract) {
-    const cliente = await Cliente.findOrFail(params.id)
+    const cliente = await ClienteRepo.show(params.id)
     return cliente
   }
 
   public async update ({ request, params }: HttpContextContract) {
-    const cliente = await Cliente.findOrFail(params.id)
     const data = await request.validate(ClienteVaidator.ClienteValidatorUpdate)
-      
-    cliente.merge(data)
-    await cliente.save()
+    const cliente = await ClienteRepo.update(params.id, data)
     return cliente
   }
 
   public async destroy ({ params }: HttpContextContract) {
-    const cliente = await Cliente.findOrFail(params.id)
-    await cliente.delete()
-    return cliente
+    await ClienteRepo.destroy(params.id)
   }
 }

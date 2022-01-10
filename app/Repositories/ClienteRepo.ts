@@ -33,4 +33,29 @@ export default class Clienterepositories {
         .andWhere('id_cliente', '=', idCliente).first()
         return cliente
     }
+    static async indexFindByCliente (idEmpresa:string){
+        const cliente = await Cliente.query().select(['id_cliente', 'nome'])
+        .where('id_empresa', '=', idEmpresa )
+        
+       return cliente
+    }
+
+    static async update (idCliente: string, request: object){
+        const cliente = await Cliente.findOrFail(idCliente)
+        cliente.merge(request)
+        await cliente.save()
+        return cliente
+    }
+
+    static async show (idCliente: string){
+        const cliente = await Cliente.findOrFail(idCliente)
+        return cliente
+    }
+
+    static async destroy (idCliente: string){
+        const cliente = await Cliente.findOrFail(idCliente)
+        await cliente.delete()
+    }
+
+
 }
