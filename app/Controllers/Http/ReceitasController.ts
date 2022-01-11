@@ -62,6 +62,15 @@ export default class ReceitasController {
     const receitas = await ReceitaRepo.indexByArtResponsavel(art, id_responsavel, id)
     return receitas
   }
+  public async getReceitas({ auth, params}: HttpContextContract) {
+    const user = await auth.authenticate()
+    const id = user.id
+    const dataInit = params.dataInit
+    const dataFinal = params.dataFinal
+    
+    const receitas = await ReceitaRepo.getReceitas(dataInit, dataFinal, id)
+    return receitas
+  }
 
   public async store ({request, auth}: HttpContextContract) {
     const user = await auth.authenticate()
