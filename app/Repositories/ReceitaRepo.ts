@@ -70,7 +70,7 @@ export default class ReceitaRepositories {
         return receitas
     }
     static async getReceitas(dataInit:string, dataFinal:string, idEmpresa:string) {
-        const receitas = await Receitas.query().select('data')
+        const receitas = await Receitas.query().select()
         .where('id_empresa', '=', idEmpresa)
         .andWhere('data', '>=', dataInit)
         .andWhere('data', '<=', dataFinal)

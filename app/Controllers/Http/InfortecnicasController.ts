@@ -66,6 +66,22 @@ export default class InfortecnicaReceitasController {
     return info
   }
 
+  public async getReceitasAgrot ({params, auth}: HttpContextContract) {
+    const user = await auth.authenticate()
+    const id = user.id
+    const dataInit = params.dataInit
+    const dataFinal = params.dataFinal
+
+    const receitas = await Infortecnica.query().select('nomeagrotoxico')
+        .where('id_empresa', '=', id)
+        .andWhere('created_at', '>=', dataInit)
+        .andWhere('created_at', '<=', dataFinal)
+        .count('nomeagrotoxico as total')
+        .groupBy('nomeagrotoxico')
+
+        return receitas
+  }
+
   public async update ({request, params}: HttpContextContract) {
     const info = await Infortecnica.findOrFail(params.id)
     const data = await request.validate(InfortecnicaValidator)
