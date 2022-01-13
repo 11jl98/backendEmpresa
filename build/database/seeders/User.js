@@ -10,7 +10,7 @@ class UserSeeder extends Seeder_1.default {
     async run() {
         await User_1.default.createMany([
             {
-                login: '09410796601',
+                login: '12345678912',
                 password: 'secret',
                 rule: 'admin',
                 id: uuid_1.v4()
@@ -20,7 +20,13 @@ class UserSeeder extends Seeder_1.default {
                 password: 'secret',
                 rule: 'admin',
                 id: uuid_1.v4()
-            }
+            },
+            {
+                login: '98765432198',
+                password: 'secret',
+                rule: 'admin',
+                id: uuid_1.v4()
+            },
         ]);
     }
 }

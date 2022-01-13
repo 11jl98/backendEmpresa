@@ -46,6 +46,14 @@ class LotesController {
         const lote = Lote_1.default.findOrFail(params.id);
         return lote;
     }
+    async LoteAvencer({ auth, params }) {
+        const user = await auth.authenticate();
+        const id = user.id;
+        const dataInit = params.dataInit;
+        const dataFinal = params.dataFinal;
+        const lote = await LoteRepo_1.default.LoteAvencer(dataInit, dataFinal, id);
+        return lote;
+    }
     async update({ request, params }) {
         const lote = await Lote_1.default.findOrFail(params.id);
         const data = await request.validate(LoteValidator_1.default.LoteValidatorUpdate);

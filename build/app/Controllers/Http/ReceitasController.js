@@ -55,6 +55,14 @@ class ReceitasController {
         const receitas = await ReceitaRepo_1.default.indexByArtResponsavel(art, id_responsavel, id);
         return receitas;
     }
+    async getReceitas({ auth, params }) {
+        const user = await auth.authenticate();
+        const id = user.id;
+        const dataInit = params.dataInit;
+        const dataFinal = params.dataFinal;
+        const receitas = await ReceitaRepo_1.default.getReceitas(dataInit, dataFinal, id);
+        return receitas;
+    }
     async store({ request, auth }) {
         const user = await auth.authenticate();
         const id = user.id;

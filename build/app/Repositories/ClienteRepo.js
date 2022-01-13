@@ -32,6 +32,25 @@ class Clienterepositories {
             .andWhere('id_cliente', '=', idCliente).first();
         return cliente;
     }
+    static async indexFindByCliente(idEmpresa) {
+        const cliente = await Cliente_1.default.query().select(['id_cliente', 'nome'])
+            .where('id_empresa', '=', idEmpresa);
+        return cliente;
+    }
+    static async update(idCliente, request) {
+        const cliente = await Cliente_1.default.findOrFail(idCliente);
+        cliente.merge(request);
+        await cliente.save();
+        return cliente;
+    }
+    static async show(idCliente) {
+        const cliente = await Cliente_1.default.findOrFail(idCliente);
+        return cliente;
+    }
+    static async destroy(idCliente) {
+        const cliente = await Cliente_1.default.findOrFail(idCliente);
+        await cliente.delete();
+    }
 }
 exports.default = Clienterepositories;
 //# sourceMappingURL=ClienteRepo.js.map

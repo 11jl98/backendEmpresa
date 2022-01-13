@@ -28,8 +28,7 @@ class ClientesController {
     async indexFindByCliente({ auth }) {
         const user = await auth.authenticate();
         const id = user.id;
-        const cliente = await Cliente_1.default.query().select(['id_cliente', 'nome'])
-            .where('id_empresa', '=', id);
+        const cliente = await ClienteRepo_1.default.indexFindByCliente(id);
         return cliente;
     }
     async store({ request, auth }) {
@@ -46,20 +45,16 @@ class ClientesController {
         return cliente;
     }
     async show({ params }) {
-        const cliente = await Cliente_1.default.findOrFail(params.id);
+        const cliente = await ClienteRepo_1.default.show(params.id);
         return cliente;
     }
     async update({ request, params }) {
-        const cliente = await Cliente_1.default.findOrFail(params.id);
         const data = await request.validate(ClienteValidator_1.default.ClienteValidatorUpdate);
-        cliente.merge(data);
-        await cliente.save();
+        const cliente = await ClienteRepo_1.default.update(params.id, data);
         return cliente;
     }
     async destroy({ params }) {
-        const cliente = await Cliente_1.default.findOrFail(params.id);
-        await cliente.delete();
-        return cliente;
+        await ClienteRepo_1.default.destroy(params.id);
     }
 }
 exports.default = ClientesController;

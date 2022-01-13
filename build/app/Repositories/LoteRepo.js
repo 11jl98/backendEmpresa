@@ -29,6 +29,17 @@ class LoteRepositories {
             .andWhere('numlote', '=', numlote.trim());
         return lotes;
     }
+    static async LoteAvencer(dataInit, dataFinal, idEmpresa) {
+        const lotes = await Lote_1.default.query()
+            .select(['id_lote', 'nomeagrotoxico', 'numlote', 'datavencimento', 'embalagem', 'capacidadeembalagem', 'unidadeembalagem'])
+            .where('id_empresa', '=', idEmpresa)
+            .andWhere('datavencimento', '>=', dataInit)
+            .andWhere('datavencimento', '<=', dataFinal)
+            .count('id_lote as total')
+            .groupBy('id_lote')
+            .orderBy('datavencimento');
+        return lotes;
+    }
 }
 exports.default = LoteRepositories;
 //# sourceMappingURL=LoteRepo.js.map

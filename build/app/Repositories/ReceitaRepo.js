@@ -66,6 +66,15 @@ class ReceitaRepositories {
             .count('id_receita as total');
         return receitas;
     }
+    static async getReceitas(dataInit, dataFinal, idEmpresa) {
+        const receitas = await Receita_1.default.query().select()
+            .where('id_empresa', '=', idEmpresa)
+            .andWhere('data', '>=', dataInit)
+            .andWhere('data', '<=', dataFinal)
+            .count('id_receita as total')
+            .groupBy('data');
+        return receitas;
+    }
 }
 exports.default = ReceitaRepositories;
 //# sourceMappingURL=ReceitaRepo.js.map

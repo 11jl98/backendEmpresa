@@ -59,6 +59,19 @@ class InfortecnicaReceitasController {
         const info = await Infortecnica_1.default.query().where('id_empresa', '=', id).andWhere('id_receita', '=', params.id);
         return info;
     }
+    async getReceitasAgrot({ params, auth }) {
+        const user = await auth.authenticate();
+        const id = user.id;
+        const dataInit = params.dataInit;
+        const dataFinal = params.dataFinal;
+        const receitas = await Infortecnica_1.default.query().select('nomeagrotoxico')
+            .where('id_empresa', '=', id)
+            .andWhere('created_at', '>=', dataInit)
+            .andWhere('created_at', '<=', dataFinal)
+            .count('nomeagrotoxico as total')
+            .groupBy('nomeagrotoxico');
+        return receitas;
+    }
     async update({ request, params }) {
         const info = await Infortecnica_1.default.findOrFail(params.id);
         const data = await request.validate(InfortecnicaValidator_1.default);

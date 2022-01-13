@@ -10,6 +10,7 @@ Route_1.default.get('/receitas/:id', 'ReceitasController.show');
 Route_1.default.get('/receitas/quantidade/responsavel/:art/:id', 'ReceitasController.indexByArtResponsavel');
 Route_1.default.get('/receitas/pesquisa/:dataInit/:dataFinal/:page', 'ReceitasController.indexDate');
 Route_1.default.get('/receitas/:dataInit/:dataFinal/:texto/:filtro/:page', 'ReceitasController.indexParamsDate');
+Route_1.default.get('/receitas/quantidade/dashboard/inicio/menu/:dataInit/:dataFinal', 'ReceitasController.getReceitas');
 Route_1.default.post('/receitas', 'ReceitasController.store');
 Route_1.default.put('/receitas/:id', 'ReceitasController.update');
 Route_1.default.delete('/receitas/:id', 'ReceitasController.destroy');
