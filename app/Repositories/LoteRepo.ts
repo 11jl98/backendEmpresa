@@ -6,7 +6,7 @@ export default class LoteRepositories {
 
     constructor(protected ctx: HttpContextContract) {
     }
-    static async index(idAgrotoxico, embalagem, capacidadeEmbalagem, unidadeEmbalagem, idEmpresa) {
+    static async index(idAgrotoxico:number, embalagem:string, capacidadeEmbalagem:string, unidadeEmbalagem:string, idEmpresa:string) {
         const lotes = await Lote.query()
             .select(['id_lote','numlote', 'datavencimento'])
             .where('id_empresa', '=', idEmpresa)
@@ -18,7 +18,7 @@ export default class LoteRepositories {
         return lotes
 
     }
-    static async indexNum(idAgrotoxico, embalagem, capacidadeEmbalagem, unidadeEmbalagem, numlote, idEmpresa) {
+    static async indexNum(idAgrotoxico:number, embalagem:string, capacidadeEmbalagem:string, unidadeEmbalagem:string, numlote:string, idEmpresa:string) {
         const lotes = await Lote.query()
             .select(['id_lote','numlote', 'datavencimento'])
             .where('id_empresa', '=', idEmpresa)
@@ -28,6 +28,18 @@ export default class LoteRepositories {
             .andWhere('unidadeembalagem', '=', unidadeEmbalagem.trim())
             .andWhere('numlote', '=', numlote.trim())
 
+        return lotes
+
+    }
+    static async LoteAvencer(dataInit:string,dataFinal:string, idEmpresa:string) {
+        const lotes = await Lote.query()
+            .select(['id_lote','nomeagrotoxico','numlote', 'datavencimento', 'embalagem','capacidadeembalagem','unidadeembalagem'])
+            .where('id_empresa', '=', idEmpresa)
+            .andWhere('datavencimento', '>=', dataInit)
+            .andWhere('datavencimento', '<=', dataFinal)
+            .count('id_lote as total')
+            .groupBy('id_lote')
+            .orderBy('datavencimento')
         return lotes
 
     }

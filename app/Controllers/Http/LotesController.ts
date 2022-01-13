@@ -55,6 +55,15 @@ export default class LotesController {
     return lote
   }
 
+  public async LoteAvencer ({auth, params}: HttpContextContract) {
+    const user = await auth.authenticate()
+    const id = user.id
+    const dataInit = params.dataInit
+    const dataFinal = params.dataFinal
+    const lote = await LoteRepo.LoteAvencer(dataInit, dataFinal, id)
+    return lote
+  }
+
   public async update ({request, params}: HttpContextContract) {
     const lote = await Lote.findOrFail(params.id)
     const data = await request.validate(LoteValidator.LoteValidatorUpdate)
