@@ -20,8 +20,8 @@ export default class MovimentaestoqueRepositories {
                 'enviado', 'nomeagrotoxico', 'id_agrotoxico', 'nomeembalagem', 'tipoembalagem', 'unidademmbalagem', 'id_embalagem', 'nomeresponsaveltecnico',
                 'tipomovimentacao', 'json', 'notafiscal', 'numlote', 'observacao', 'quantidade', 'receita', 'registroagrotox', 'serie', 'statussc',])
             .where('id_empresa', '=', idEmpresa)
+            .orderBy('data', 'desc')
             .paginate(page, 5)
-
         return movimentaestoque
     }
 

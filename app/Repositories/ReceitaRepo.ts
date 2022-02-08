@@ -3,13 +3,15 @@ import Infortecnica from 'App/Models/Infortecnica'
 
 export default class ReceitaRepositories {
 
-    static async index(texto: string, filtro: string, page:number, idEmpresa:string) {
+    static async index(filtro: string,texto: string, page:number, idEmpresa:string) {
         const receitas = await Receitas.query().select(['id_cliente', 'id_propriedade', 'id_responsavel', 'numeroreceita', 'numeroart',
             'data', 'nome', 'statusreceita', 'observacao', 'obsmip', 'notafiscal', 'serie', 'valor', 'datafinal', 'statussc', 'jsonsc', 'codretsc',
             'enviado', 'devolucao', 'cogoias', 'seriesc', 'complementoreceita', 'chavenfe', 'datanfe', 'protocolors', 'protocolocancelamentors', 'contrato'])
             .where('id_empresa', '=', idEmpresa)
             .andWhere(filtro, 'like', `%${texto}%`)
             .orderBy(filtro, 'asc')
+            .preload('cliente')
+            .preload('responsavel')
             .paginate(page, 5)
         return receitas
     }

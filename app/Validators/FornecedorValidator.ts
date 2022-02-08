@@ -8,7 +8,7 @@ class FornecedorValidatorStore {
 	public schema = schema.create({
 		nome: schema.string({ trim: true }),
 		nomefantasia: schema.string({ trim: true }),
-		cpfcnpj: schema.string({ trim: true }, [rules.minLength(14), rules.maxLength(18), rules.unique({ table: 'clientes', column: 'cpfcnpj' })]),
+		cpfcnpj: schema.string({ trim: true }, [rules.minLength(14), rules.maxLength(18), rules.unique({ table: 'fornecedors', column: 'cpfcnpj' })]),
 		endereco: schema.string.optional({ trim: true }),
 		bairro: schema.string.optional({ trim: true }),
 		numero: schema.string.optional({ trim: true }),
@@ -32,7 +32,7 @@ class FornecedorValidatorUpdate {
 	public schema = schema.create({
 		nome: schema.string({ trim: true }),
 		nomefantasia: schema.string({ trim: true }),
-		cpfcnpj: schema.string({ trim: true }, [rules.minLength(14), rules.maxLength(18)]),
+		cpfcnpj: schema.string({ trim: true }, [rules.minLength(14), rules.maxLength(18),]),
 		endereco: schema.string.optional({ trim: true }),
 		bairro: schema.string.optional({ trim: true }),
 		numero: schema.string.optional({ trim: true }),

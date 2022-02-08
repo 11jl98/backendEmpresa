@@ -54,7 +54,7 @@ class ClienteValidatorUpdate {
 		email: schema.string({ trim: true }, [rules.email()]),
 		iepr: schema.string({ trim: true }),
 		observacao: schema.string.optional({ trim: true }),
-		rgie: schema.string({ trim: true }),
+		rgie: schema.string.optional({ trim: true }),
 		status: schema.string.optional({ trim: true }),
 		codibge: schema.string({ trim: true })
 

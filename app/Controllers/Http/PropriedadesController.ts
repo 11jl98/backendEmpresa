@@ -22,14 +22,15 @@ export default class PropriedadesController {
 
   public async store ({request, auth}: HttpContextContract) {
     const user = await auth.authenticate()
+    const Uuid = uuid()
     const id = user.id
     const data = await request.validate(PropriedadeValidator.PropriedadeValidatorStore)
     const propriedade = await Propriedade.create({
       ...data,
       idEmpresa: id,
-      idPropriedade: uuid()
+      idPropriedade: Uuid
     })
-    await propriedade.preload('cliente')
+    propriedade.idPropriedade = Uuid
     return propriedade
   }
 
